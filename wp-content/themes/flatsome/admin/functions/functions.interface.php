@@ -234,13 +234,11 @@ function of_ajax_callback()
 	}
 	elseif ($save_type == 'save')
 	{
-
 		wp_parse_str(stripslashes($_POST['data']), $smof_data);
 		unset($smof_data['security']);
 		unset($smof_data['of_save']);
 		of_save_options($smof_data);
-		
-		
+		flush_rewrite_rules();
 		die('1');
 	}
 	elseif ($save_type == 'reset')

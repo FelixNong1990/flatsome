@@ -11,9 +11,9 @@ if(!isset($flatsome_opt['blog_layout'])){$flatsome_opt['blog_layout'] = '';}
 ?>
 
 <?php // ADD BLOG HEADER IF SET
-if(isset($flatsome_opt['blog_header'])){ echo do_shortcode($flatsome_opt['blog_header']);}
+if($flatsome_opt['blog_header']){ echo do_shortcode($flatsome_opt['blog_header']);}
 ?>
-<div class="page-wrapper page-<?php if($flatsome_opt['blog_layout']){ echo $flatsome_opt['blog_layout'];} else {echo 'right-sidebar';} ?>">
+<div class="page-wrapper <?php echo $flatsome_opt['blog_style']; ?>  page-<?php if($flatsome_opt['blog_layout']){ echo $flatsome_opt['blog_layout'];} else {echo 'right-sidebar';} ?>">
 	<div class="row">
 
 		<?php if($flatsome_opt['blog_layout'] == 'left-sidebar') {
@@ -23,7 +23,7 @@ if(isset($flatsome_opt['blog_header'])){ echo do_shortcode($flatsome_opt['blog_h
 	 	 } else if($flatsome_opt['blog_layout'] == 'no-sidebar' && $flatsome_opt['blog_style'] == 'blog-pinterest'){
 		   echo '<div id="content" class="large-12 columns blog-pinterest-container" role="main">';
 		 } else if($flatsome_opt['blog_layout'] == 'no-sidebar'){
-		 	echo '<div id="content" class="large-10 columns large-offset-1" role="main">';
+		 	echo '<div id="content" class="large-12 columns" role="main">';
 		 } else {
 		 	echo '<div id="content" class="large-9 left columns" role="main">';
 		 }

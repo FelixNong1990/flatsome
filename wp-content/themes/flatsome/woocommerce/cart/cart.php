@@ -55,7 +55,7 @@ global $woocommerce, $flatsome_opt;
 
 					<td class="product-thumbnail">
 						<?php
-							$thumbnail = apply_filters( 'woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key );
+							$thumbnail = apply_filters( 'woocommerce_cart_item_thumbnail', str_replace( array( 'http:', 'https:' ), '', $_product->get_image() ), $cart_item, $cart_item_key );
 
 							if ( ! $_product->is_visible() )
 								echo $thumbnail;

@@ -4,9 +4,11 @@ Template name: Right sidebar
 */
 get_header(); ?>
 
+<?php if( has_excerpt() ) { ?>
 <div class="page-header">
-<?php if( has_excerpt() ) the_excerpt();?>
+	<?php the_excerpt(); ?>
 </div>
+<?php } ?>
 
 <div class="page-wrapper page-right-sidebar">
 <div class="row">

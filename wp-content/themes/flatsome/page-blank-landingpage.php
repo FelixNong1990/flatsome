@@ -29,11 +29,6 @@ global $flatsome_opt;
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
-<div id="back-to-site">
-<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?> - <?php bloginfo( 'description' ); ?>" rel="home">
-		<?php bloginfo( 'name' ); ?>
-</a>
-</div><!-- #back-to-site -->
 
 <div id="wrapper">
 <div id="main-content" class="site-main">
@@ -42,9 +37,11 @@ global $flatsome_opt;
 	<!-- woocommerce message -->
 	<?php  woocommerce_show_messages(); ?>
 <?php } ?>
+<?php if( has_excerpt() ) { ?>
 <div class="page-header">
-<?php the_excerpt();?>
+	<?php the_excerpt(); ?>
 </div>
+<?php } ?>
 <div id="content" role="main">
 			<?php while ( have_posts() ) : the_post(); ?>
 				<?php the_content(); ?>

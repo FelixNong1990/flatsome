@@ -9,8 +9,17 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-global $post, $product, $flatsome_opt;
+global $post, $product, $flatsome_opt, $wc_cpdf;
 ?>
+
+<?php if($wc_cpdf->get_value(get_the_ID(), '_bubble_new')) { ?>
+<div class="callout large <?php if($product->is_on_sale()) echo 'has-sale'; ?> <?php echo $flatsome_opt['bubble_style']; ?>">
+            <div class="inner success-bg">
+              <div class="inner-text "><?php _e('New','flatsome'); ?>!</div>
+            </div>
+</div><!-- end callout -->
+<?php } ?>
+
 <?php if ($product->is_on_sale() && !$flatsome_opt['sale_bubble_percentage'] ) : ?>
 	 <div class="callout large <?php echo $flatsome_opt['bubble_style']; ?>">
             <div class="inner">

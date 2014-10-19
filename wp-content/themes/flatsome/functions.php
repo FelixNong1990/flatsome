@@ -10,7 +10,7 @@
  */
 if ( ! isset( $content_width ) ) $content_width = 1000; /* pixels */
 
-/* INCLUDES */
+/* add woocommerce support */
 add_theme_support( 'woocommerce' );
 
 /* Add theme option panel */
@@ -30,28 +30,26 @@ function flatsome_register_required_plugins() {
 	 * If the source is NOT from the .org repo, then source is also required.
 	 */
 	$plugins = array(
-
-
 		array(
 			'name'     				=> 'WooCommerce', // The plugin name
 			'slug'     				=> 'woocommerce', // The plugin slug (typically the folder name)
-			'source'   				=> get_template_directory() . '/inc/plugins/woocommerce.zip', // The plugin source
+			//'source'   				=> get_template_directory() . '/inc/plugins/woocommerce.zip', // The plugin source
 			'required' 				=> true, // If false, the plugin is only 'recommended' instead of required
-			'version' 				=> '2.9', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
+			'version' 				=> '2.2.4', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
 			'force_activation' 		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
 			'force_deactivation' 	=> false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
-			'external_url' 			=> '', // If set, overrides default API URL and points to an external URL
+			'external_url' 			=> 'http://wordpress.org/plugins/woocommerce/', // If set, overrides default API URL and points to an external URL
 		),
 
 		array(
 			'name'     				=> 'Ninja Forms', // The plugin name
 			'slug'     				=> 'ninja-forms', // The plugin slug (typically the folder name)
-			'source'   				=> get_template_directory() . '/inc/plugins/ninja-forms.zip', // The plugin source
+			//'source'   				=> get_template_directory() . '/inc/plugins/ninja-forms.zip', // The plugin source
 			'required' 				=> false, // If false, the plugin is only 'recommended' instead of required
-			'version' 				=> '2.6.4', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
+			'version' 				=> '2.8.3', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
 			'force_activation' 		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
 			'force_deactivation' 	=> false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
-			'external_url' 			=> '', // If set, overrides default API URL and points to an external URL
+			'external_url' 			=> 'https://wordpress.org/plugins/ninja-forms/', // If set, overrides default API URL and points to an external URL
 		),
 
 		array(
@@ -62,7 +60,7 @@ function flatsome_register_required_plugins() {
 			'version' 				=> '2.2.4', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
 			'force_activation' 		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
 			'force_deactivation' 	=> false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
-			'external_url' 			=> '', // If set, overrides default API URL and points to an external URL
+			'external_url' 			=> 'https://wordpress.org/plugins/regenerate-thumbnails/', // If set, overrides default API URL and points to an external URL
 		),
 
 		
@@ -70,9 +68,9 @@ function flatsome_register_required_plugins() {
 			'name'     				=> 'Taxonomy Metadata', // The plugin name
 			'slug'     				=> 'taxonomy-metadata', // The plugin slug (typically the folder name)
 			'source'   				=> get_template_directory() . '/inc/plugins/taxonomy-metadata.zip', // The plugin source
-			'required' 				=> false, // If false, the plugin is only 'recommended' instead of required
+			'required' 				=> true, // If false, the plugin is only 'recommended' instead of required
 			'version' 				=> '0.4', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
-			'force_activation' 		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
+			'force_activation' 		=> true, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
 			'force_deactivation' 	=> false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
 			'external_url' 			=> '', // If set, overrides default API URL and points to an external URL
 		),
@@ -83,17 +81,6 @@ function flatsome_register_required_plugins() {
 			'source'   				=> get_template_directory() . '/inc/plugins/woosidebars.zip', // The plugin source
 			'required' 				=> false, // If false, the plugin is only 'recommended' instead of required
 			'version' 				=> '1.3.1', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
-			'force_activation' 		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
-			'force_deactivation' 	=> false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
-			'external_url' 			=> '', // If set, overrides default API URL and points to an external URL
-		),
-		
-		array(
-			'name'     				=> 'Envato Toolkit', // The plugin name
-			'slug'     				=> 'envato-wordpress-toolkit-master', // The plugin slug (typically the folder name)
-			'source'   				=> get_template_directory() . '/inc/plugins/envato-wordpress-toolkit-master.zip', // The plugin source
-			'required' 				=> false, // If false, the plugin is only 'recommended' instead of required
-			'version' 				=> '1.6.3', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
 			'force_activation' 		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
 			'force_deactivation' 	=> false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
 			'external_url' 			=> '', // If set, overrides default API URL and points to an external URL
@@ -112,22 +99,12 @@ function flatsome_register_required_plugins() {
 			array(
 			'name'     				=> 'YITH WooCommerce Wishlist', // The plugin name
 			'slug'     				=> 'yith-woocommerce-wishlist', // The plugin slug (typically the folder name)
-			'source'   				=> get_template_directory() . '/inc/plugins/yith-woocommerce-wishlist.zip', // The plugin source
+			//'source'   				=> get_template_directory() . '/inc/plugins/yith-woocommerce-wishlist.zip', // The plugin source
 			'required' 				=> false, // If false, the plugin is only 'recommended' instead of required
-			'version' 				=> '1.1.2', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
+			'version' 				=> '1.1.6', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
 			'force_activation' 		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
 			'force_deactivation' 	=> false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
-			'external_url' 			=> '', // If set, overrides default API URL and points to an external URL
-		),
-			array(
-			'name'     				=> 'UX Featured Item Post Type', // The plugin name
-			'slug'     				=> 'ux-featured-item', // The plugin slug (typically the folder name)
-			'source'   				=> get_template_directory() . '/inc/plugins/ux-featured-item.zip', // The plugin source
-			'required' 				=> false, // If false, the plugin is only 'recommended' instead of required
-			'version' 				=> '1.1', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
-			'force_activation' 		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
-			'force_deactivation' 	=> false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
-			'external_url' 			=> '', // If set, overrides default API URL and points to an external URL
+			'external_url' 			=> 'https://wordpress.org/plugins/yith-woocommerce-wishlist/', // If set, overrides default API URL and points to an external URL
 		),
 			array(
 			'name'     				=> 'Nextend Facebook Connect', // The plugin name
@@ -156,7 +133,7 @@ function flatsome_register_required_plugins() {
 		'parent_url_slug' 	=> 'themes.php', 				// Default parent URL slug
 		'menu'         		=> 'install-required-plugins', 	// Menu slug
 		'has_notices'      	=> true,                       	// Show admin notices or not
-		'is_automatic'    	=> false,					   	// Automatically activate plugins after installation or not
+		'is_automatic'    	=> true,					   	// Automatically activate plugins after installation or not
 		'message' 			=> '',							// Message to output right before the plugins table
 		'strings'      		=> array(
 			'page_title'                       			=> __( 'Install Required Plugins', '' ),
@@ -280,43 +257,71 @@ function flatsome_widgets_init() {
 add_action( 'widgets_init', 'flatsome_widgets_init' );
 
 
-
 /* INCLUDE FLATSOME WIDGETS */
 include_once('inc/widgets/recent-posts.php'); // Load Widget Recent Posts
 include_once('inc/widgets/upsell-widget.php'); // Load Upsell widget
-include_once('inc/widgets/woocommerce-subcategories-widget.php'); // Show sub categories widget
-
-
-
 
 /**
  * Enqueue scripts and styles
  */
+
+
+// load latest jQuery version from google
+function ux_modify_jquery() {
+    if (!is_admin()) {
+        wp_deregister_script('jquery');
+        wp_register_script('jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js', false, '2.1.1');
+        wp_enqueue_script('jquery');
+    }
+}
+add_action('init', 'ux_modify_jquery');
+
+
 function flatsome_scripts() {
 	
 	global $flatsome_opt;
 
-	/* styles */
-	wp_enqueue_style( 'flatsome-icons', get_template_directory_uri() .'/css/fonts.css', array(), '1.9.9', 'all' );
-	wp_enqueue_style( 'flatsome-animations', get_template_directory_uri() .'/css/animations.css', array(), '1.9.9', 'all' );
-
-	/* main style */
-	wp_enqueue_style( 'flatsome-style', get_stylesheet_uri(), array(), '1.9.9', 'all');	
+	/* Styles */
+	if(!isset($flatsome_opt['minified_flatsome']) || !$flatsome_opt['minified_flatsome']){
+	wp_enqueue_style( 'flatsome-icons', get_template_directory_uri() .'/css/fonts.css', array(), '2.0', 'all' );
+	wp_enqueue_style( 'flatsome-animations', get_template_directory_uri() .'/css/animations.css', array(), '2.0', 'all' );
+	wp_enqueue_style( 'flatsome-style', get_stylesheet_uri(), array(), '2.0', 'all');
+	wp_register_style('flatsome-effect', get_template_directory_uri() .'/css/effects.css', array(), '2.0', 'all' );
+	} else {
+	   wp_enqueue_style( 'flatsome-css-minified', get_template_directory_uri() .'/css/flatsome.min.css', array(), '2.0', 'all' );
+	}	
 
 	/* JS libaries */
-	wp_enqueue_script( 'flatsome-modernizer', get_template_directory_uri() .'/js/modernizr.js?v=1.9.9', array( 'jquery' ), '20120202', true );
- 	wp_enqueue_script( 'flatsome-plugins', get_template_directory_uri() .'/js/plugins.js?v=1.9.9', array( 'jquery' ), '20120202', true );
-	wp_enqueue_script( 'flatsome-iosslider', get_template_directory_uri() .'/js/jquery.iosslider.min.js?v=1.9.9', array( 'jquery' ), '20120202', true );
-	wp_enqueue_script( 'flatsome-magnific-popup', get_template_directory_uri() .'/js/jquery.magnific-popup.js?v=1.9.9', array( 'jquery' ), '20120202', true );
-	wp_enqueue_script( 'flatsome-theme-js', get_template_directory_uri() .'/js/theme.js?v=1.9.9', array( 'jquery' ), '20120202', true );
-	
+	if(!isset($flatsome_opt['minified_flatsome']) || !$flatsome_opt['minified_flatsome']){
+	wp_enqueue_script( 'flatsome-modernizer', get_template_directory_uri() .'/js/modernizr.js?v=2.0', array( 'jquery' ), '2.1.1', true );
+ 	wp_enqueue_script( 'flatsome-plugins', get_template_directory_uri() .'/js/plugins.js?v=2.0', array( 'jquery' ), '2.1.1', true );
+	wp_enqueue_script( 'flatsome-iosslider', get_template_directory_uri() .'/js/jquery.iosslider.min.js?v=2.0', array( 'jquery' ), '2.1.1', true );
+	wp_enqueue_script( 'flatsome-magnific-popup', get_template_directory_uri() .'/js/jquery.magnific-popup.js?v=2.0', array( 'jquery' ), '2.1.1', true );
+	wp_enqueue_script( 'flatsome-theme-js', get_template_directory_uri() .'/js/theme.js?v=2.0', array( 'jquery' ), '2.1.1', true );
+	} else {
+	wp_enqueue_script( 'flatsome-theme-js-minified', get_template_directory_uri() .'/js/flatsome.min.js?v=2.0', array( 'jquery' ), '2.1.1', true );
+	}
 
-	/* Remove styles included plugins have added */
+	// add JS variables to scripts
+    wp_localize_script( 'flatsome-theme-js', 'ajaxURL',  array( 'ajaxurl'    => admin_url( 'admin-ajax.php' ) ) );
+    wp_localize_script( 'flatsome-theme-js-minified', 'ajaxURL',  array( 'ajaxurl'    => admin_url( 'admin-ajax.php' ) ) );
+
+	/* Remove plugin styles */
 	wp_deregister_style('yith-wcwl-font-awesome');
 	wp_deregister_style('yith-wcwl-font-awesome-ie7');
 	wp_deregister_style('yith-wcwl-main');
 	wp_deregister_style('nextend_fb_connect_stylesheet');
-	
+	wp_deregister_style('projects-handheld');
+	wp_deregister_style('projects-styles');
+	wp_deregister_style('yith_wcas_frontend');
+
+	/* clean visual composer */
+	if (class_exists('WPBakeryVisualComposerAbstract')) {
+		if(!isset($flatsome_opt['clean_visual_composer']) || $flatsome_opt['clean_visual_composer']){
+			wp_deregister_style('js_composer_custom_css');
+			wp_deregister_style('js_composer_front');
+		}
+	}	
 	
 	if ( ! is_admin() ) {
 	wp_deregister_style('woocommerce-layout');	
@@ -349,30 +354,35 @@ if (current_user_can( 'manage_options' ) ){
  'title' => __('Flatsome Theme Options'),
  'href' => $optionUrl
  ));
- /*
- $wp_admin_bar->add_menu( array(
- 'parent' => false,
- 'id' => 'block_preview',
- 'title' => __('UX Blocks Libary'),
- 'href' => $blocks_url,
- )); */
 }
 
 }
 add_action( 'wp_before_admin_bar_render', 'flatsome_admin_bar_render' );
 
 
-/* UNREGISTRER DEFAULT WOOCOMMERCE HOOKS */
+/* WOOCOMMERCE SETTINGS */
 remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20);
 remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_upsell_display', 15);
 remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10);
 remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_login_form', 10 );
 remove_action( 'woocommerce_before_shop_loop', 'woocommerce_show_messages', 10 );
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_rating', 10 );
+remove_action( 'woocommerce_before_shop_loop', 'woocommerce_result_count', 20 );
+remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30 );
+add_action( 'ux_woocommerce_navigate_products', 'woocommerce_result_count', 20 );
+add_action( 'ux_woocommerce_navigate_products', 'woocommerce_catalog_ordering', 30 );
 
+// include custom product page settings
+include_once('inc/class-wc-product-data-fields.php');
+include_once('inc/custom-wc-fields.php');
+
+// remoce checkout from checkout page if not set
 if(!$flatsome_opt['coupon_checkout'] || !isset($flatsome_opt['coupon_checkout'])){
 	remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10 );
 }
+
+
+
 
 /* add shortcode to widgets */
 add_filter('widget_text', 'do_shortcode');
@@ -392,29 +402,31 @@ include_once( get_template_directory() . '/inc/google-fonts.php' );
 
 
 /* SHORTCODES */
+
+include_once('inc/shortcodes/banners.php');
+include_once('inc/shortcodes/slider.php');
+include_once('inc/shortcodes/banner_grid.php');
+include_once('inc/shortcodes/grid.php');
 include_once('inc/shortcodes/accordion.php');
 include_once('inc/shortcodes/tabs.php');
-include_once('inc/shortcodes/buttons.php');
-include_once('inc/shortcodes/grid.php');
-include_once('inc/shortcodes/slider.php');
-include_once('inc/shortcodes/share_follow.php');
-include_once('inc/shortcodes/titles_dividers.php');
-include_once('inc/shortcodes/blog_posts.php');
-include_once('inc/shortcodes/testimonials.php');
-include_once('inc/shortcodes/banners.php');
-include_once('inc/shortcodes/google_maps.php');
-include_once('inc/shortcodes/product_sliders.php');
-include_once('inc/shortcodes/product_lookbook.php');
-include_once('inc/shortcodes/product_pinterest_style.php');
 include_once('inc/shortcodes/featured_box.php');
+include_once('inc/shortcodes/buttons.php');
+include_once('inc/shortcodes/share_follow.php');
+include_once('inc/shortcodes/elements.php');
+include_once('inc/shortcodes/titles_dividers.php');
+include_once('inc/shortcodes/lightbox.php');
+include_once('inc/shortcodes/blog_posts.php');
+include_once('inc/shortcodes/google_maps.php');
+include_once('inc/shortcodes/testimonials.php');
 include_once('inc/shortcodes/team_members.php');
 include_once('inc/shortcodes/messages.php');
 include_once('inc/shortcodes/search.php');
-include_once('inc/shortcodes/lightbox.php');
 include_once('inc/shortcodes/product_flip.php');
-include_once('inc/shortcodes/elements.php');
-include_once('inc/shortcodes/icon.php');
-
+include_once('inc/shortcodes/product_sliders.php');
+include_once('inc/shortcodes/product_categories.php');
+include_once('inc/shortcodes/product_lookbook.php');
+include_once('inc/shortcodes/product_pinterest_style.php');
+include_once('inc/shortcodes/featured_items.php');
 
 /* SHORTCODE INSERTER */
 if(is_admin()){
@@ -423,6 +435,14 @@ if(is_admin()){
 
 /* CUSTOM POST TYPES */
 include_once('inc/post-types/blocks.php');
+include_once('inc/post-types/featured-items.php');
+
+
+/* PAGE BUILDER BETA */
+if(is_admin() && $flatsome_opt['flatsome_builder'] || !isset($flatsome_opt['flatsome_builder'])){
+	include_once('inc/builder/flatsome-builder.php');
+}
+
 
 /* ADD CUSTOM WP_EDITOR CSS */
 add_filter('mce_css', 'my_editor_style');
@@ -445,7 +465,7 @@ function add_ieFix () {
     echo '<![endif]-->';
 }
 add_action('wp_head', 'add_ieFix');
-
+	
 
 // Change product pr page if set.
 if(isset($flatsome_opt['products_pr_page'])){

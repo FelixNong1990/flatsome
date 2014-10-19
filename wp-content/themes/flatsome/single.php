@@ -8,23 +8,54 @@
 get_header(); 
 
 global $flatsome_opt;
-if(!isset($flatsome_opt['blog_layout'])){$flatsome_opt['blog_layout'] = '';}
+if(!isset($flatsome_opt['blog_post_layout'])){$flatsome_opt['blog_post_layout'] = $flatsome_opt['blog_layout'];}
+
 ?>
 
-<?php // ADD BLOG HEADER IF SET
-if(isset($flatsome_opt['blog_header'])){ echo do_shortcode($flatsome_opt['blog_header']);}
+<?php // Add blog header if set
+if($flatsome_opt['blog_header']){ echo do_shortcode($flatsome_opt['blog_header']);}
 ?>
 
-<div class="page-wrapper page-<?php if($flatsome_opt['blog_layout']){ echo $flatsome_opt['blog_layout'];} else {echo 'right-sidebar';} ?>">
+<?php 
+// Create big featured image if set
+if($flatsome_opt['blog_post_style'] == 'big-featured-image') { ?>
+<div class="parallax-title">
+<?php while ( have_posts() ) : the_post(); ?>
+	<?php ob_start(); ?>
+	<header class="entry-header text-center">
+		<h1 class="entry-title"><?php the_title(); ?></h1>
+		<div class="tx-div small"></div>
+		<?php if ( 'post' == get_post_type() ) : ?>
+		<div class="entry-meta">
+			<?php flatsome_posted_on(); ?>
+		</div>
+		<?php if($flatsome_opt['blog_share']) echo '[share]'; ?>
+		<?php endif; ?>
+	</header>
+	<?php 
+	$bg = '#333';
+	if( has_post_thumbnail() ) $bg = get_post_thumbnail_id();
+	
+	$header_html = ob_get_contents();
+	$header_html = '[ux_banner animate="fadeInDown" bg_overlay="#000" parallax="8" parallax_text="2" height="360px" bg="'.$bg.'"]'.$header_html.'[/ux_banner]';
+	
+	ob_end_clean();
+	echo do_shortcode($header_html);
+
+	?>
+<?php endwhile; // end of the loop. ?>
+</div>
+<?php } ?>
+
+<div class="page-wrapper page-<?php echo $flatsome_opt['blog_post_layout']; ?>">
 	<div class="row">
 
-
-		<?php if($flatsome_opt['blog_layout'] == 'left-sidebar') {
+		<?php if($flatsome_opt['blog_post_layout'] == 'left-sidebar') {
 		 	echo '<div id="content" class="large-9 right columns" role="main">';
-		 } else if($flatsome_opt['blog_layout'] == 'right-sidebar'){
+		 } else if($flatsome_opt['blog_post_layout'] == 'right-sidebar'){
 		 	echo '<div id="content" class="large-9 left columns" role="main">';
-		 } else if($flatsome_opt['blog_layout'] == 'no-sidebar'){
-		 	echo '<div id="content" class="large-10 columns large-offset-1" role="main">';
+		 } else if($flatsome_opt['blog_post_layout'] == 'no-sidebar'){
+		 	echo '<div id="content" class="large-12 columns" role="main">';
 		 } else {
 		 	echo '<div id="content" class="large-9 left columns" role="main">';
 		 }
@@ -46,7 +77,7 @@ if(isset($flatsome_opt['blog_header'])){ echo do_shortcode($flatsome_opt['blog_h
 	</div><!-- #content -->
 
 	<div class="large-3 columns left">
-		<?php if($flatsome_opt['blog_layout'] == 'left-sidebar' || $flatsome_opt['blog_layout'] == 'right-sidebar'){
+		<?php if($flatsome_opt['blog_post_layout'] == 'left-sidebar' || $flatsome_opt['blog_post_layout'] == 'right-sidebar'){
 			get_sidebar();
 		}?>
 	</div><!-- end sidebar -->

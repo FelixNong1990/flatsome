@@ -4,9 +4,15 @@ Template name: Featured Items - 3 columns
 */
 get_header(); ?>
 
+<?php if( has_excerpt() ) { ?>
 <div class="page-header">
-<?php if( has_excerpt() ) the_excerpt();?>
+	<?php the_excerpt(); ?>
 </div>
+<?php } ?>
+
+<?php while ( have_posts() ) : the_post(); ?>
+	<?php the_content(); ?>
+<?php endwhile; // end of the loop. ?>		
 
 <div  class="page-wrapper page-featured-item">
 <div class="row">
@@ -15,17 +21,11 @@ get_header(); ?>
 	<header class="entry-header ">
 		<h1 class="entry-title"><?php the_title(); ?></h1>
 	</header>
-	<div class="item-intro">
-		<?php while ( have_posts() ) : the_post(); ?>
-			<?php the_content(); ?>
-		<?php endwhile; // end of the loop. ?>		
-	</div>
 
-	<ul class="large-block-grid-3 small-block-grid-2">
+<ul class="large-block-grid-3">
 	<?php
 				global $flatsome_opt;
-				$temp = $wp_query;
-				$wp_query= null;
+				
 				$post_counter = 0;
 				$wp_query = new WP_Query(array(
 					'post_type' => 'featured_item',
@@ -36,22 +36,32 @@ get_header(); ?>
 				while ($wp_query->have_posts()) : $wp_query->the_post();
 					$post_counter++;
 				?>
+		
+		    <li class="ux-box featured-item text-center ux-text-bounce">
+            <div class="inner">
+              <a href="<?php echo get_permalink(get_the_ID()); ?>" title="<?php the_title(); ?>">
+                <div class="ux-box-image">
+                      <?php the_post_thumbnail('thumbnail'); ?>
+                </div><!-- .ux-box-image -->
+                <div class="ux-box-text">
+                    <h4 class="uppercase"><?php the_title(); ?></h4>
 
-					<li class="featured-item text-center">
-						<a href="<?php echo get_permalink(get_the_ID()); ?>">
-                            <div class="featured_item_image"><?php the_post_thumbnail('medium'); ?></div>
-                            <h3><?php the_title(); ?></h3>
-                             <div class="featured_item_cats">
-                            <?php  echo strip_tags ( get_the_term_list( get_the_ID(), 'featured_item_category', "",", " ) );?>
-                            </div>
-                            <div class="tx-div small"></div>
-                        </a>
-                    </li>
+                    <p class="show-next small-font uppercase">
+                      <?php  echo strip_tags ( get_the_term_list( get_the_ID(), 'featured_item_category', "",", " ) );?>
+                    </p>
+                    <div class="tx-div small"></div>
+
+                </div><!-- .ux-box-text-overlay -->
+              </a>
+           </div>
+          </li>
 				
 				<?php endwhile; // end of the loop. ?>
 
-</ul>
+	</ul><!-- .row -->
+
 <!-- PAGINATION -->
+<div class="row">
 <div class="large-12 columns">
 	<div class="pagination-centered">
   	<?php
@@ -70,9 +80,10 @@ get_header(); ?>
 
 </div><!--  end pagination container -->
 </div><!-- end large-12 -->
-<!-- end PAGINATION -->
+</div><!-- end PAGINATION -->
 
-<?php $wp_query = null; $wp_query = $temp;?>
+
+<?php wp_reset_query(); ?>
 
 
 </div><!-- end #content large-12  -->

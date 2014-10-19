@@ -11,7 +11,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-global $woocommerce_loop;
+global $woocommerce_loop, $flatsome_opt;
 
 // Store loop count we're currently on
 if ( empty( $woocommerce_loop['loop'] ) )
@@ -19,14 +19,21 @@ if ( empty( $woocommerce_loop['loop'] ) )
 
 // Increase loop count
 $woocommerce_loop['loop']++;
+
+// set cat style
+if(isset($flatsome_opt['cat_style'])){
+	if($flatsome_opt['cat_style'] && !isset($style)) $style = $flatsome_opt['cat_style'];
+}
+if(!isset($style)) $style = "text-badge";
+
 ?>
-<li class="product-category">
 
-	<?php do_action( 'woocommerce_before_subcategory', $category ); ?>
-	<div class="inner">
-	<a href="<?php echo get_term_link( $category->slug, 'product_cat' ); ?>">
-
-		<?php
+<li class="product-category ux-box text-center ux-<?php echo $style; ?>">
+<?php do_action( 'woocommerce_before_subcategory', $category ); ?>
+<div class="inner">
+  <a href="<?php echo get_term_link( $category->slug, 'product_cat' ); ?>">
+    <div class="ux-box-image">
+         <?php
 			/**
 			 * woocommerce_before_subcategory_title hook
 			 *
@@ -34,25 +41,21 @@ $woocommerce_loop['loop']++;
 			 */
 			do_action( 'woocommerce_before_subcategory_title', $category );
 		?>
-		<div class="header-title">
-		<h3>
-			<?php
-				echo $category->name;
-				if ( $category->count > 0 )
-					echo apply_filters( 'woocommerce_subcategory_count_html', ' <span class="count">' . $category->count . ' '.__('Products','woocommerce').'</span>', $category);
-			?>
+    </div><!-- .ux-box-image -->
+    <div class="ux-box-text  show-first">
+       	<h3 class="uppercase header-title">
+       	<?php 	echo $category->name; ?>
 		</h3>
-		</div>
-
+		<p class="smallest-font uppercase count"><?php if ( $category->count > 0 ) echo apply_filters( 'woocommerce_subcategory_count_html', ' ' . $category->count . ' '.__('Products','woocommerce').'', $category); ?></p>
 		<?php
 			/**
 			 * woocommerce_after_subcategory_title hook
 			 */
 			do_action( 'woocommerce_after_subcategory_title', $category );
 		?>
-	</a>
-	</div><!-- .inner -->
-
-	<?php do_action( 'woocommerce_after_subcategory', $category ); ?>
-
+       
+    </div><!-- .ux-box-text-overlay -->
+  </a>
+</div>
+<?php do_action( 'woocommerce_after_subcategory', $category ); ?>
 </li>

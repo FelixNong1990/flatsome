@@ -10,7 +10,7 @@
 //  - Next / Prev navigation on product pages
 //  - Blog - Add "Read more" links
 //  - Product Quick View
-//  - Catalog Mode (1.3)
+//  - Catalog Mode
 
 global $flatsome_opt;
 
@@ -281,7 +281,7 @@ function flatsome_add_to_cart_dropdown( $fragments ) {
 
                                       		?></div>
                                       		<div class="small-3 large-3 columns">
-                                      			<?php   echo '<a class="cart_list_product_img" href="'.get_permalink($cart_item['product_id']).'">' . $_product->get_image().'</a>';                                                    ?>
+                                                <?php  echo '<a class="cart_list_product_img" href="'.get_permalink($cart_item['product_id']).'">' . str_replace( array( 'http:', 'https:' ), '', $_product->get_image() ).'</a>'; ?>
                                       		</div>
                                       	</div><!-- end row -->
 
@@ -293,7 +293,7 @@ function flatsome_add_to_cart_dropdown( $fragments ) {
                                 </div><!-- Cart list -->
                                             
                                     <div class="minicart_total_checkout">                                        
-                                        <?php _e('Cart Subtotal', 'woocommerce'); ?><span><?php echo $woocommerce->cart->get_cart_total(); ?></span>                                   
+                                        <?php _e('Cart Subtotal', 'woocommerce'); ?><span><?php echo $woocommerce->cart->get_cart_subtotal(  ); ?></span>                                   
                                     </div>
                                     
                                     <a href="<?php echo esc_url( $woocommerce->cart->get_cart_url() ); ?>" class="button expand uppercase"><?php _e('View Cart', 'woocommerce'); ?></a>   
@@ -340,7 +340,7 @@ function flatsome_add_to_cart_dropdown( $fragments ) {
             
                     $average = number_format($rating / $count, 2);
             
-                    echo '<a href="#tab-reviews" class="scroll-to-reviews"><div class="star-rating tip-top" data-tip="'.$count.' review(s)"><span style="width:'.($average*16).'px"><span itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating" class="rating"><span itemprop="ratingValue">'.$average.'</span><span itemprop="reviewCount" class="hidden">'.$count.'</span></span> '.__('out of 5', 'woocommerce').'</span></div></a>';
+                    echo '<a href="#tab-reviews" class="scroll-to-reviews"><div class="star-rating tip-top" title="'.$count.' review(s)"><span style="width:'.($average*16).'px"><span itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating" class="rating"><span itemprop="ratingValue">'.$average.'</span><span itemprop="reviewCount" class="hidden">'.$count.'</span></span> '.__('out of 5', 'woocommerce').'</span></div></a>';
 
                 }
                 
@@ -482,20 +482,6 @@ function flatsome_add_morelink_class( $link, $text )
 }
 add_action( 'the_content_more_link', 'flatsome_add_morelink_class', 10, 2 );
 
-
-
-/* PRODUCT QUICK VIEW  */
-add_action('wp_head', 'wpse83650_lazy_ajax', 0, 0);
-function wpse83650_lazy_ajax()
-{
-    ?>
-    <script type="text/javascript">
-    /* <![CDATA[ */
-    var ajaxurl = "<?php echo esc_js(admin_url('admin-ajax.php')); ?>";
-    /* ]]> */
-    </script>
-    <?php
-}
 add_action('wp_ajax_jck_quickview', 'jck_quickview');
 add_action('wp_ajax_nopriv_jck_quickview', 'jck_quickview');
 
@@ -524,8 +510,6 @@ add_action( 'woocommerce_single_product_lightbox_summary', 'woocommerce_template
 add_action( 'woocommerce_single_product_lightbox_summary', 'woocommerce_template_single_excerpt', 20 );
 add_action( 'woocommerce_single_product_lightbox_summary', 'woocommerce_template_single_meta', 40 );
 add_action( 'woocommerce_single_product_lightbox_summary', 'woocommerce_template_single_add_to_cart', 30 );
-
-
 
 
 /* CATALOG MODE SETTINGS */
@@ -579,6 +563,7 @@ function flatsome_pre_get_posts_action( $query ) {
 }
 add_action('pre_get_posts', 'flatsome_pre_get_posts_action');
 
+
 /**
  * Edit $wp_query results.
  */
@@ -595,18 +580,3 @@ function flatsome_posts_results_filter( $posts, $query ) {
     return $posts;
 }
 add_filter( 'posts_results', 'flatsome_posts_results_filter', 10, 2 );
-
-
-
-
-
-
-add_action('wp_ajax_get_shortcode', 'get_shortcode');
-add_action('wp_ajax_nopriv_get_shortcode', 'get_shortcode');
-
-/** The Quickview Ajax Output **/
-function get_shortcode() {
-    $content =  $_POST["content"];
-    print do_shortcode($content);
-    die();
-}

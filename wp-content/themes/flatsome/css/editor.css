@@ -1,24 +1,44 @@
 body{font-family: Helvetica,Arial,Sans-serif;}
 .uppercase{text-transform: uppercase;}
-.alt-font{font-family: Georgia,Serif}
-
+.alt-font{font-family: Georgia,Serif;font-style: italic;}
 p.lead{font-size: 150%;}
 p.lead.text-center{text-align: center;}
+.text-pull-inn{max-width: 800px;margin-left:auto;margin-right: auto;text-align: center;}
 
+#edit-helper{position: absolute;top:0;right:0;left::0;width:100%;color:red;}
+
+.h-large{font-size: 32px;line-height: 32px}
 .h-xlarge{font-size: 42px;line-height: 42px}
-
-.edit{background: #000}
-
 .thin-font{font-weight:normal;font-weight: 300;}
-
 .text-box-dark{background: #000!important;display: block;color: #FFF}
 .text-box-light{background: #fff!important;border:1px solid #eee;display: block;color: #000}
-.ux_helper{pointer-events:none;z-index:-999;width:100%!important;}
 .text-bordered-primary{border:3px solid #627f9a;padding:5px;}
 .text-bordered-white{border:3px solid #ccc;padding:5px;}
 .text-bordered-dark{border:3px solid #000;padding:5px;}
+.text-boarder-top-bottom-white,.text-boarder-top-bottom-dark{border-top:3px solid #ccc; padding-top:5px; border-bottom:3px solid #ccc; padding-bottom:5px; }
+.text-boarder-top-bottom-dark{border-color:#000}
+
+
+
+
+/*buttons */
+a.button{background: #999;display: inline-block;padding:5px 10px;color:#FFF;text-decoration: none; text-transform: uppercase;}
+a.button.alt-button{background: transparent!important;border:3px solid #999; padding:3px 8px; color:#999;}
+a.button.alt-button.secondary{border-color:#ccc; color:#ccc;}
+a.button.alt-button.success{border-color:#a3d247; color:#a3d247;}
+a.button.alt-button.white{border-color:#555; color:#555;}
+
+a.button.secondary{background-color: #ccc}
+a.button.success{background-color: #a3d247}
+a.button.alert{background-color: #e01a00}
+
+a.button.large{padding:10px 20px!important;}
+a.button.large.alt-button{padding:8px 17px!important;}
+
+
 
 /* ANIMATIONS */
+
 .animated {
   -webkit-animation-delay:0.3s;-moz-animation-delay:0.3;-o-animation-delay:0.3s;animation-delay:0.3s;
   -webkit-animation-fill-mode:both;-moz-animation-fill-mode:both;-ms-animation-fill-mode:both;-o-animation-fill-mode:both;animation-fill-mode:both;-webkit-animation-duration:1s;-moz-animation-duration:1s;-ms-animation-duration:1s;-o-animation-duration:1s;animation-duration:1s;}.animated.hinge{-webkit-animation-duration:2s;-moz-animation-duration:2s;-ms-animation-duration:2s;-o-animation-duration:2s;animation-duration:2s;}@-webkit-keyframes flash {

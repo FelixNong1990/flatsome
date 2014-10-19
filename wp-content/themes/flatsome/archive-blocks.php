@@ -19,17 +19,18 @@ if ( !current_user_can( 'manage_options' ) ) die;
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 	<?php wp_head(); ?>
 	<style>
-	.blocks-cats li{float:left;margin-right: 10px;}
-	.blocks-cats a{padding:3px 10px;-webkit-border-radius: 99px;
--moz-border-radius: 99px; text-transform: uppercase;
-font-size: 13px;
-border-radius: 99px;}
-	.blocks-cats a.current{background: #888;color:#FFF;}
+	.blocks-cats li{margin-right: 10px;list-style:none;}
+	.blocks-cats a{font-size: 13px; padding-bottom: 5px;display: block;}
+	.blocks-cats a.current{color:#000;}
+	.block-title{position:relative;width:100%;top:-40px;padding-left: 30px;}
+	.block-title a{padding:15px;background-color: #FFF;opacity: 0}
+	.block-shortcode{position: relative; display: block; border-top: 2px dashed #ddd;padding-top:30px;margin-bottom: 60px;}
+	.block-shortcode:hover .block-title a{opacity: 1}
 	</style>
 </head>
 
-<body style="background-color:#FFF!important;">
-<div style="position:fixed;top:30px;left:0;right:0;padding:10px;background-color:#eee;z-index:99">
+<body style="background-color:#FFF;padding-top:40px;" class="full-width">
+<div class="blocks-header" style="position:fixed;left:0;padding:50px 10px; width:160px; top:0; bottom:0; background-color:#eee;z-index:99;">
 <?php
 //list terms in a given taxonomy (useful as a widget for twentyten)
 $taxonomy = 'block_categories';
@@ -47,8 +48,16 @@ echo '<li><a href="?cat='.$tax_term->slug.'" class="'.$cur_class.'">'.$tax_term-
 ?>
 </div><!-- .header-wrapper -->
 
-	<div id="primary" class="content-area" style="padding-bottom:50px;padding-top:60px;background:#ccc;">
-		<div id="content" class="site-content" role="main">
+
+<div id="blocks-wrapper" style="height:0;padding-left:160px;">
+				<?php if(!isset($_GET["cat"])){ ?> 
+					<div class="text-center" style="padding-top:100px;">
+						<h1>Browse Blocks</h1>
+						<p class="lead">Blocks are collections of Shortcodes<br> that can be inserted anywhere by using a shortcode</p>
+
+				<? } ?>
+			
+
 				<?php
 				if(isset($_GET["cat"])){ $cat = $_GET["cat"];
 				} else {$cat = '';}
@@ -68,23 +77,15 @@ echo '<li><a href="?cat='.$tax_term->slug.'" class="'.$cur_class.'">'.$tax_term-
 				$post_data = get_post(get_the_ID(), ARRAY_A);
 	 			 $slug = $post_data['post_name'];
 				?>
-
-				<div class="block-shortcode" style="margin:30px auto; border-bottom:10px solid #ccc;max-width: 70.5em; background:#FFF;">
-				<div class="block-title" style="background:#f1f1f1;padding:15px;margin-bottom:40px;">
-						<a href="<?php echo get_edit_post_link();?>"><?php echo the_title(); ?></a><span class="right">[block id="<?php echo $slug; ?>"]</span> 
+				<div class="block-shortcode">
+				<div class="block-title">
+						<a href="<?php echo get_edit_post_link();?>" class="tip-top" title="Edit Block"><?php echo the_title(); ?></a>
 				</div>
-
-					<?php the_content(); ?>
-
-				<?php  
-				 
-	             ?>
-	           
+					<?php echo fixShortcode(get_the_content()); ?>
 				</div>
 
 				<?php endwhile; // end of the loop. ?>
-		</div><!-- #content -->
-	</div><!-- #primary -->
+</div><!-- #blocks-wrapper -->
 
 <?php wp_footer(); ?>
 

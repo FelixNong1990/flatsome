@@ -112,16 +112,6 @@ else if($flatsome_opt['blog_style'] == 'blog-list') { ?>
 				<?php printf( __( '%1$s', 'flatsome' ), $categories_list ); ?>
 			</span>
 
-			<?php
-				/* translators: used between list items, there is a space after the comma */
-				$tags_list = get_the_tag_list( '', __( ', ', 'flatsome' ) );
-				if ( $tags_list ) :
-			?>
-			<span class="sep"> | </span>
-			<span class="tags-links">
-				<?php printf( __( 'Tagged %1$s', 'flatsome' ), $tags_list ); ?>
-			</span>
-			<?php endif; // End if $tags_list ?>
 		<?php endif; // End if 'post' == get_post_type() ?>
 		<h3 class="entry-title"><a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></h3>
 		<?php the_excerpt(); ?>

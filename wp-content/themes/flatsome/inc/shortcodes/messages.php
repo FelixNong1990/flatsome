@@ -23,10 +23,12 @@ function message_box($atts, $content = null) {
     }
 
 
-	$content = do_shortcode($content);
+	$content = fixShortcode($content);
 	
 	return '<div class="message-box '.$color.'" style="background-image:url('.$background.');' .$background_color.'"><div class="row"><div class="large-12 columns"><div class="inner">'.$content.'</div></div></div></div><!-- .message-box -->';
 }
 
 
 add_shortcode("message_box", "message_box");
+
+

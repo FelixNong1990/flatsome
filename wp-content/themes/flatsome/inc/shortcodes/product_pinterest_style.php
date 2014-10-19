@@ -3,7 +3,6 @@
 function products_pinterest_style($atts, $content = null) {
 	$sliderrandomid = rand();
 	extract(shortcode_atts(array(
-		"title" => '',
 		'products'  => '999',
         'cat' => '',
         'columns' => '3'

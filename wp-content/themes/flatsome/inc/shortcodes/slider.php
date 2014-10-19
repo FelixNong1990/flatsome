@@ -8,20 +8,21 @@ function shortcode_ux_slider($atts, $content=null) {
         'bullets' => 'true',
         'auto_slide' => 'true',
         'arrows' => 'true',
-        'hide_nav' => 'false',
+        'hide_nav' => 'true',
         'nav_color' => '',
         'infinitive' => 'true',
+        'columns' => '',
         'height' => '',
-        'column_padding' => ''
+        'top_padding' => ''
     ), $atts ) );
 
     ?> 
 <div class="ux_slider_wrapper">
 <div id="slider_<?php echo $sliderrandomid ?>" class="iosSlider default" style="<?php if($height) echo 'min-height:'.$height.'; height:'.$height; ?>">
-        <div class="slider">
-            <?php fixShortcode($content); ?>      
+        <div class="slider <?php if($columns) echo 'columns-'.$columns; ?>">
+            <?php echo fixShortcode($content); ?>
          </div>
-        <div class="sliderControlls <?php echo $nav_color?> <?php if($hide_nav == 'false') echo 'hide_nav'; ?>">
+        <div class="sliderControlls <?php echo $nav_color; ?> <?php if($hide_nav == 'false') echo 'dont_hide_nav'; ?>">
             <?php if($arrows == 'true'){ ?> 
             <div class="sliderNav hide-for-small">
             <a href="javascript:void(0)" class="nextSlide next_<?php echo $sliderrandomid; ?>"><span class="icon-angle-left"></span></a>
@@ -32,11 +33,17 @@ function shortcode_ux_slider($atts, $content=null) {
         </div><!-- .sliderControlls -->
         <div class="loading dark"><i></i><i></i><i></i><i></i></div>
 </div><!-- #slider -->
+
 <script type="text/javascript">
     (function($){
     $(window).load(function(){
-
+    // Paragraph fix
     $('#slider_<?php echo $sliderrandomid; ?>').find('br').remove();
+    $('#slider_<?php echo $sliderrandomid; ?>').find('p').each(function() {
+    var $this = $(this);
+    if($this.html().replace(/\s|&nbsp;/g, '').length == 0)
+        $this.remove();
+    });
 
     /* install slider */
     $('#slider_<?php echo $sliderrandomid; ?>').iosSlider({
@@ -57,7 +64,7 @@ function shortcode_ux_slider($atts, $content=null) {
     });
 
       function slideChange(args) {
-        $(args.sliderContainerObject).find('.inner').each(function(){
+        $(args.sliderContainerObject).find('.inner-wrap').each(function(){
           $(this).removeClass($(this).attr('data-animate'));
         });
         $(args.sliderContainerObject).find('.scroll-animate').each(function(){
@@ -65,7 +72,7 @@ function shortcode_ux_slider($atts, $content=null) {
         });
 
        /* start text animation */
-       $(args.currentSlideObject).find('.inner').addClass($(args.currentSlideObject).find('.inner').attr('data-animate'));
+       $(args.currentSlideObject).find('.inner-wrap').addClass($(args.currentSlideObject).find('.inner-wrap').attr('data-animate'));
        $(args.currentSlideObject).find('.scroll-animate').each(function(){
           $(this).addClass('animated').addClass($(this).attr('data-animate'));
        });
@@ -73,23 +80,23 @@ function shortcode_ux_slider($atts, $content=null) {
        /* change slider height */
        var slide_height = $(args.currentSlideObject).outerHeight();
        $(args.sliderContainerObject).css('min-height',slide_height);
-
+       $(args.sliderContainerObject).css('height','auto');
 
        /* add current class to slide */
-       $(args.sliderContainerObject).find('.ux_banner').removeClass('current');
+       $(args.sliderContainerObject).find('.current').removeClass('current');
        $(args.currentSlideObject).addClass('current');
 
        /* update bullets */
        $(args.sliderContainerObject).find('.sliderBullets .bullet').removeClass('active');
        $(args.sliderContainerObject).find('.sliderBullets .bullet:eq(' + (args.currentSlideNumber - 1) + ')').addClass('active');
+       
       }
-
      function slideResize(args) {
         /* set height of first slide */
         setTimeout(function(){
               var slide_height = $(args.currentSlideObject).outerHeight();
               $(args.sliderContainerObject).css('min-height',slide_height);
-              $(args.sliderContainerObject).find('.ux_banner .center').vAlign();
+              $(args.sliderContainerObject).css('height','auto');
         },300);
  
       }
@@ -98,25 +105,30 @@ function shortcode_ux_slider($atts, $content=null) {
         /* remove spinner when slider is loaded */
         $(args.sliderContainerObject).find('.loading').fadeOut();
 
+      
+
         /* add current class to first slide */
         $(args.currentSlideObject).addClass('current');
 
         /* add parallax class if contains paralaxx slides */
         $(args.sliderContainerObject).find('.ux_parallax').parent().parent().parent().addClass('parallax_slider');
-        
+           
         /* animate first slide */
-        $(args.currentSlideObject).find('.inner').addClass($(args.currentSlideObject).find('.inner').attr('data-animate'));
+        $(args.currentSlideObject).find('.inner-wrap').addClass($(args.currentSlideObject).find('.inner-wrap').attr('data-animate'));
           $(args.currentSlideObject).find('.scroll-animate').each(function(){
           $(this).addClass('animated').addClass($(this).attr('data-animate'));
-        });
+        });       
 
         /* set height of first slide */
         var slide_height = $(args.currentSlideObject).outerHeight();
         $(args.sliderContainerObject).css('min-height',slide_height);
+        $(args.sliderContainerObject).css('height','auto');
+        if(slide_height < '100')  $(args.sliderContainerObject).toggleClass('small-slider');
 
-        /* set text position */
-        $(args.sliderContainerObject).find('.ux_banner .center').vAlign();
-
+        /* fix texts */
+        $(args.sliderContainerObject).find('.ux_banner .inner br').remove();
+      
+      
         <?php if($bullets == 'true'){ ?> 
         /* add slider bullets */
         var slide_id = 1;
@@ -137,30 +149,7 @@ function shortcode_ux_slider($atts, $content=null) {
     })
     })(jQuery);
     </script>
-
-<?php if($height){ ?>
-<style>
-@media only screen and (max-width: 768px) {
-  #slider_<?php echo $sliderrandomid; ?>, #slider_<?php echo $sliderrandomid; ?> .slider > *, #slider_<?php echo $sliderrandomid; ?> .banner-bg{max-height:<?php echo $height*0.9; ?>px!important;}
-}
-@media only screen and (max-width: 600px) {
-  #slider_<?php echo $sliderrandomid; ?>, #slider_<?php echo $sliderrandomid; ?> .slider > *, #slider_<?php echo $sliderrandomid; ?> .banner-bg{max-height:<?php echo $height*0.8; ?>px!important;}
-}
-@media only screen and (max-width: 500px) {
-  #slider_<?php echo $sliderrandomid; ?>, #slider_<?php echo $sliderrandomid; ?> .slider > *, #slider_<?php echo $sliderrandomid; ?> .ux_banner{font-size: 8px}
-  #slider_<?php echo $sliderrandomid; ?>, #slider_<?php echo $sliderrandomid; ?> .slider > *, #slider_<?php echo $sliderrandomid; ?> .banner-bg{max-height:<?php echo $height*0.7; ?>px!important;}
-}
-@media only screen and (max-width: 400px) {
-  #slider_<?php echo $sliderrandomid; ?>, #slider_<?php echo $sliderrandomid; ?> .slider > *, #slider_<?php echo $sliderrandomid; ?> .ux_banner{font-size: 6px}
-  #slider_<?php echo $sliderrandomid; ?>, #slider_<?php echo $sliderrandomid; ?> .slider > *, #slider_<?php echo $sliderrandomid; ?> .banner-bg{max-height:<?php echo $height*0.6; ?>px!important;}
-}
-</style>
-<?php } ?>
-
-<?php if($column_padding){ ?>
-#slider_<?php echo $sliderrandomid; ?> .slider > .columns > *{padding:<?php echo $column_padding?>!important;}
-</style>
-<?php } ?>
+    <?php if($top_padding) { ?><style>#slider_<?php echo $sliderrandomid; ?> .ux-section-content > .row, #slider_<?php echo $sliderrandomid; ?> .ux_banner .row{margin-top: <?php echo $top_padding; ?>}</style><?php } ?>
 </div><!-- .ux_slider_wrapper -->
 <?php
     $content = ob_get_contents();
@@ -168,4 +157,3 @@ function shortcode_ux_slider($atts, $content=null) {
     return $content;
 }
 add_shortcode("ux_slider", "shortcode_ux_slider");
-?>

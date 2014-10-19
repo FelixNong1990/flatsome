@@ -21,7 +21,7 @@ if ( get_option( 'woocommerce_enable_shipping_calc' ) === 'no' || ! WC()->cart->
 
 	<h2><a href="#" class="shipping-calculator-button"><?php _e( 'Calculate Shipping', 'woocommerce' ); ?></a></h2>
 
-	<section class="shipping-calculator-form">
+	<section class="shipping-calculator-form" style="display:none;">
 
 		<p class="form-row form-row-wide">
 			<div class="custom select-wrapper">

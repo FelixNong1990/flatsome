@@ -1,6 +1,6 @@
 <?php
 // [tabgroup]
-function tabgroup( $params, $content = null ) {
+function ux_tabgroup( $params, $content = null ) {
 	$GLOBALS['tabs'] = array();
 	$GLOBALS['tab_count'] = 0;
 	$i = 1;
@@ -11,26 +11,27 @@ function tabgroup( $params, $content = null ) {
 		'style' => 'normal',
 	), $params));
 
-	$content = do_shortcode($content);
+	$content = fixShortcode($content);
 
 	if( is_array( $GLOBALS['tabs'] ) ){
 		
 		foreach( $GLOBALS['tabs'] as $key => $tab ){
 			$active = $key == 0 ? ' active' : ''; // Set first tab active by default.
 			$tabs[] = '<li class="tab'.$active.'"><a href="#panel'.$randomid.$i.'">'.$tab['title'].'</a></li>';
-			$panes[] = '<div class="panel'.$active.'" id="panel'.$randomid.$i.'"><p>'.do_shortcode($tab['content']).'</p></div>';
+			$panes[] = '<div class="panel'.$active.'" id="panel'.$randomid.$i.'">'.fixShortcode($tab['content']).'</div>';
 			$i++;
 		}
+		if($title) $title = '<h3>'.$title.'</h3>';
 		$return = '
 		<div class="tabbed-content shortcode_tabgroup pos_'.$style.'">
-			<h3>'.$title.'</h3>
-			<ul class="tabs">'.implode( "\n", $tabs ).'</ul><div class="panels">'.implode( "\n", $panes ).'</div><div class="clr"></div></div>';
+			'.$title.'
+			<ul class="tabs">'.implode( "\n", $tabs ).'</ul><div class="panels">'.implode( "\n", $panes ).'</div></div>';
 	}
 	return $return;
 }
 
 // [tabgroup_vertical]
-function tabgroup_vertical( $params, $content = null ) {
+function ux_tabgroup_vertical( $params, $content = null ) {
 	$GLOBALS['tabs'] = array();
 	$GLOBALS['tab_count'] = 0;
 	$i = 1;
@@ -41,27 +42,28 @@ function tabgroup_vertical( $params, $content = null ) {
 		'style' => 'normal',
 	), $params));
 
-	$content = do_shortcode($content);
+	$content = fixShortcode($content);
 
 	if( is_array( $GLOBALS['tabs'] ) ){
 	
 		foreach( $GLOBALS['tabs'] as $key => $tab ){
 			$current = $key == 0 ? ' current-menu-item' : ''; // Set first menu item active by default.
 			$active = $key == 0 ? ' active' : ''; // Set first tab active by default.
-			$tabs[] = '<li class="tab'.$current.'"><a href="#panel'.$randomid.$i.'">'.$tab['title'].' <span>asdf</span></a></li>';
-			$panes[] = '<div class="tabs-inner'.$active.'" id="panel'.$randomid.$i.'"><p>'.do_shortcode($tab['content']).'</p></div>';
+			$tabs[] = '<li class="tab'.$current.'"><a href="#panel'.$randomid.$i.'">'.$tab['title'].'</a></li>';
+			$panes[] = '<div class="tabs-inner'.$active.'" id="panel'.$randomid.$i.'">'.fixShortcode($tab['content']).'</div>';
 			$i++;
 		}
+		if($title) $title = '<h3>'.$title.'</h3>';
 		$return = '
 			<div class="row collapse vertical-tabs shortcode_tabgroup_vertical pos_'.$style.'">
-			<h3>'.$title.'</h3>
+			'.$title.'
 			<div class="large-3 columns"><ul class="tabs-nav">'.implode( "\n", $tabs ).'</ul></div><div class="large-9 columns">'.implode( "\n", $panes ).'</div></div>';
 	}
 	return $return;
 }
 
 
-function tab( $params, $content = null) {
+function ux_tab( $params, $content = null) {
 	extract(shortcode_atts(array(
 			'title' => '',
 			'title_small' => ''
@@ -73,8 +75,6 @@ function tab( $params, $content = null) {
 }
 
 
-add_shortcode('tabgroup', 'tabgroup');
-add_shortcode('tabgroup_vertical', 'tabgroup_vertical');
-add_shortcode( 'tab', 'tab' );
-
-?>
+add_shortcode('tabgroup', 'ux_tabgroup');
+add_shortcode('tabgroup_vertical', 'ux_tabgroup_vertical');
+add_shortcode('tab', 'ux_tab' );

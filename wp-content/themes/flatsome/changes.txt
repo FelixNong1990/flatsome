@@ -1,12 +1,72 @@
+--- 2.0 ---
+NEW: Flatsome Page Builder added (BETA)
+NEW: Enable minified CSS and JavaScript in Theme Options for better speed. 
+NEW: New Awesome alternative focused Checkout template.
+NEW: SVG icons can be added to [featured_box]. Add any icon you find here: https://icomoon.io/
+NEW: Improved [scroll_to] shortcode for creating awesome on page navigation.
+NEW: [logo] shortcode.
+NEW: Youtube and vimeo button links opens default in Lightbox.
+NEW: UX Banner grid has now pre-defined layouts you can choose from.
+NEW: New grid styles added to Category Grid shortcode.
+NEW: Custom heading shortcode. Add any Google Font as custom heading.
+NEW: New transparent page template with light text and light logo.
+NEW: Phone shortcode and Header button shortcode to use in header.
+NEW: New styles added to Team Member shortcode.
+NEW: New styles added to Blog post shortcode
+NEW: New default category box styles.
+NEW: Add "New" badge to your products!
+NEW: You can now have different templates on blog archive and single posts.
+NEW: Awesome new Big Featured Image blog style for single posts.
+NEW: Footer Content field to Categories.
+NEW: Add Custom product tab for each product.
+NEW: New page template - Full Width - Parallax Title.
+
+NEW OPTION: Right main menu menu option.
+NEW OPTION: Related products can now be a grid / slider or disabled.
+NEW OPTION: Added VKontakte to share icons.
+NEW OPTION: Added custom width to rows. (width="")
+NEW OPTION: Button styles added to Formats drop down in WP Editor.
+NEW OPTION: Set custom column widths for mobile view.
+NEW OPTION: Set custom mobile and tablet height for UX Banners.
+NEW OPTION: LinkedIn and Instagram added to Team Member shortcode.
+NEW OPTION: Added align="center" to [divider] shortcode.
+NEW OPTION: Tooltip added to Price table bullets.
+NEW OPTION: Overlay on UX Banners. Add a color overlay for better text visibility.
+NEW OPTION: Hide excerpts from Blog post shortcode
+
+FIXED: Better Accordion usability for mobiles.
+FIXED: Ajax Layered Navigation now works correctly
+FIXED: YITH WooCommerce Ajax Navigation now works correctly
+FIXED: Quick view visible on iPad portrait and iPad landscape.
+FIXED: Featured Price table now works.
+FIXED: Image placeholder for products without image.
+FIXED: Category grid featured image bug.
+FIXED: Slider bullets unclickable in Firefox.
+FIXED: Various minor bugs
+FIXED: Error messages now works correctly.
+
+
+--- 1.9.9.5 ----
+FIX: Google Rich Snippet bugs
+FIX: Mobile menu open/close bug
+FIX: Firefox, Mobile and iPad logo width issues.
+FIX: Various RTL improvements + RTL issues with Checkout and input fields.
+FIX: Added Shortcode inserter to products.
+FIX: New and better tooltip script. Tooltips works much better now!
+FIX: Parallax banners are now visible on iPad landscape mode.
+FIX: iPad portrait CSS improvements.
+
+--- 1.9.9.2 ----
+Fixed various bugs reported by users
+
 --- 1.9.9 ----
-NEW: Better Shortcode inserter!
+NEW: Better Shortcode inserter
 NEW: New Tabs Shortcode styles. Centered tabs and Pills style.
 NEW: New product page tab styles. Centered tabs and Pills.
 NEW: Embed Youtube videos to [ux_banner]. F.ex [ux_banner youtube="9d8wWcJLnFI"] (Beta)
 NEW: New page template - Boxed header.
 NEW: Horizontal blog post slider. [blog_posts style="horizontal"]
 NEW: New Awesome Category grid shortcode. [ux_product_categories_grid number="12" parent="0" orderby="name"]
-NEW: [scroll_to] shortcode.
 
 NEW OPTION: Possible to add custom HTML content before "My account" and "Cart" in header.
 NEW OPTION: Open featured item grid and slider items in a Lightbox. Add lightbox="true"
@@ -14,7 +74,7 @@ NEW OPTION: Added style="divided" to [row]. Add lines between columns.
 NEW OPTION: Added hover="focus" to to [col]. Fade out other columns on hover.
 NEW OPTION: Added title="" to [section] shortcode.
 
-FIX: UX Sliders are now more responsive. Add height="" to the[ux_banner]
+FIX: UX Sliders are now more responsive. Add height="" to the [ux_slider]
 FIX: Improved Block editing experience.
 FIX: Setting logo container width for centered layout now works.
 FIX: Improved [featured] Shortcode. Added img_width="" option for icons.

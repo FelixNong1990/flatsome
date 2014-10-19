@@ -39,8 +39,6 @@ if(function_exists('get_term_meta')){
 </div>
 
 
-
-
 <div class="row category-page">
 
 <?php
@@ -69,7 +67,7 @@ if(function_exists('get_term_meta')){
     </div><!-- .left -->
 
     <div class="right">
-    <?php if ( have_posts() ) : do_action( 'woocommerce_before_shop_loop' ); ?><?php endif; ?>
+    	<?php do_action( 'ux_woocommerce_navigate_products'); ?>    	
     </div><!-- .right -->
 </div><!-- .breadcrumb-row -->
 </div><!-- .large-12 breadcrumb -->
@@ -84,7 +82,7 @@ if(function_exists('get_term_meta')){
 		<div class="large-12 columns">
 <?php } ?>
 
-
+	<?php if ( have_posts() ) : do_action( 'woocommerce_before_shop_loop' ); ?><?php endif; ?>
     <?php do_action( 'woocommerce_archive_description' ); ?>
 
 		<?php if ( have_posts() ) : ?>
@@ -148,6 +146,8 @@ if(function_exists('get_term_meta')){
       wp_reset_query();
     ?>
   <?php endif; ?>
+
+
                       
  </div><!-- .large-12 -->
 
@@ -164,7 +164,25 @@ if(function_exists('get_term_meta')){
 <?php } ?>
 
 
-
 </div><!-- end row -->
+
+<?php 
+// GET CUSTOM HEADER CONTENT FOR CATEGORY
+if(function_exists('get_term_meta')){
+	$queried_object = get_queried_object();
+	
+	if (isset($queried_object->term_id)){
+
+		$term_id = $queried_object->term_id;  
+		$content = get_term_meta($term_id, 'cat_meta');
+
+		if(isset($content[0]['cat_footer'])){
+			echo '<div class="row"><div class="large-12 column"><div class="cat-footer"><hr/>';
+			echo do_shortcode($content[0]['cat_footer']);
+			echo '</div></div></div>';
+		}
+	}
+}
+?>
 
 <?php get_footer('shop'); ?>

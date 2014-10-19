@@ -24,26 +24,22 @@ if ( !current_user_can( 'manage_options' ) ) die;
 
 	<?php wp_head(); ?>
 </head>
-<body style="background-color:#FFF;">
-	<div id="primary" class="content-area" style="padding-bottom:50px;">
-		<div id="content" class="site-content" role="main">
-	
+<body class="antialiased">
+	<div id="wrapper" class="content-area" style="height:1px;">
+		<div class="ux_block">
 		<?php while ( have_posts() ) : the_post(); ?>
 
-			<?php the_content(); ?>
-
+			<?php echo fixShortcode(get_the_content()); ?>
+			 <?php if (current_user_can('edit_posts')) {
+			 $edit_link = get_edit_post_link( $post->ID ); 
+			 echo '<a class="edit-link" target="_blank" href="'.$edit_link.'">Edit Block</a>';
+			 } ?>
 		<?php endwhile; // end of the loop. ?>
+		</div>
 		</div><!-- #content -->
 	</div><!-- #primary -->
 
-	<?php
-	 $post_data = get_post(get_the_ID(), ARRAY_A);
-	 $slug = $post_data['post_name']; ?>
-	 	<div style="position:fixed;bottom:0;left:0;right:0;background:#FFF;border-top:1px solid #eee;padding:10px;text-align:center;color:#555;z-index:999;opacity:0.8">
-		<span style="font-weight:bold;color:#666;"> [block id="<?php echo $slug; ?>'"]</span></div>
-	 <?php
-	?>
 <?php wp_footer(); ?>
-
+<style>.demo_store{display: none!important} html{margin-top: 0px!important}</style>
 </body>
 </html>

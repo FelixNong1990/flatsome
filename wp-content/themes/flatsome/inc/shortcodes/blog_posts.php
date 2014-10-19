@@ -4,17 +4,16 @@ function shortcode_latest_from_blog($atts, $content = null) {
 	global $flatsome_opt;
 	$sliderrandomid = rand();
 	extract(shortcode_atts(array(
-		"title" => '',
 		"posts" => '8',
 		"columns" => '4',
 		"category" => '',
-		"style" => '',
+		"style" => 'text-normal',
 		"image_height" => 'auto',
-		"show_date" => 'true'
+		"show_date" => 'true',
+		"excerpt" => 'true',
 	), $atts));
 	ob_start();
 	?>
-
     <script>
 	jQuery(document).ready(function($) {
 		$(window).load(function() {
@@ -28,8 +27,7 @@ function shortcode_latest_from_blog($atts, $content = null) {
 				onSliderLoaded: slideLoad,
 				onSliderResize: slideLoad
 			});
-
-			function slideLoad(args) {
+			function slideLoad(args){
 		     	setTimeout(function(){
 		     		var t=0;
 					 var t_elem;
@@ -47,7 +45,7 @@ function shortcode_latest_from_blog($atts, $content = null) {
 	});
 	</script>
     	<div class="row column-slider">
-            <div id="slider_<?php echo $sliderrandomid ?>" class="iosSlider blog-posts" style="min-height:<?php echo $image_height; ?>;height:<?php echo $image_height; ?>;">
+            <div id="slider_<?php echo $sliderrandomid ?>" class="iosSlider blog-posts <?php if($style  == 'text-overlay') { ?>slider-center-arrows<?php } ?>" style="min-height:<?php echo $image_height; ?>;height:<?php echo $image_height; ?>;">
                 <ul class="slider large-block-grid-<?php echo $columns ?> small-block-grid-2">
 
 					<?php
@@ -63,70 +61,40 @@ function shortcode_latest_from_blog($atts, $content = null) {
                     if ( $recentPosts->have_posts() ) : ?>
 
                         <?php while ( $recentPosts->have_posts() ) : $recentPosts->the_post(); ?>
-						<?php if($style == 'horizontal') { ?>
-						  <li class="blog_shortcode_item">
-						  	<div class="row">
-							 <div class="large-6 columns">
-								 <a href="<?php the_permalink() ?>" style="padding-right:0;">
-	                       		 <div class="entry-image">
-	                       		 	<div class="entry-image-attachment" style="max-height:<?php echo  $image_height; ?>;overflow:hidden;">
-						           		 <?php the_post_thumbnail('medium'); ?>
-						      	    </div>
-						      	 <?php if($show_date != 'false') {?>
-						            <div class="post-date">
-							                <span class="post-date-day"><?php echo get_the_time('d', get_the_ID()); ?></span>
-							                <span class="post-date-month"><?php echo get_the_time('M', get_the_ID()); ?></span>
-							         </div>
-						         <?php } ?>
-					         </div><!-- entry image -->
-					          </a>
-							 </div>
-							 <div class="large-6 columns">
-							 	 <a href="<?php the_permalink() ?>" style="padding:0">
-							    <div class="blog_shortcode_text" style="padding-right:30px;">
-	                   		      <div class="from_the_blog_title"><h3><?php the_title(); ?></h3></div>
-	                   		     <div class="tx-div small"></div>
-	                   		      <div class="from_the_blog_excerpt">
-	                                <?php
-	                                    $excerpt = get_the_excerpt();
-	                                    echo string_limit_words($excerpt,15) . '[...]';
-	                                ?>
-	                                 	   	</div>
-	                   		      <div class="from_the_blog_comments"><?php echo get_comments_number( get_the_ID() ); ?> comments</div>
-	                   		  	</div><!-- .post_shortcode_text -->
-	                   		  </a>
-							 </div>
-							</div><!-- /row -->
-                            </li>
 
-						<?php } else { ?>
-						  <li class="blog_shortcode_item text-center">
-                          <a href="<?php the_permalink() ?>">
-                       		 <div class="entry-image">
-                       		 	<div class="entry-image-attachment" style="max-height:<?php echo  $image_height; ?>;overflow:hidden;">
-					           		 <?php the_post_thumbnail('medium'); ?>
-					      	    </div>
-					      	 <?php if($show_date != 'false') {?>
-					            <div class="post-date">
-						                <span class="post-date-day"><?php echo get_the_time('d', get_the_ID()); ?></span>
-						                <span class="post-date-month"><?php echo get_the_time('M', get_the_ID()); ?></span>
-						         </div>
-					         <?php } ?>
-					         </div><!-- entry image -->
-        					<div class="blog_shortcode_text">
-                   		      <div class="from_the_blog_title"><h3><?php the_title(); ?></h3></div>
-                   		     <div class="tx-div small"></div>
-                   		      <div class="from_the_blog_excerpt">
-                                <?php
-                                    $excerpt = get_the_excerpt();
-                                    echo string_limit_words($excerpt,15) . '[...]';
-                                ?>
-                                 	   	</div>
-                   		      <div class="from_the_blog_comments"><?php echo get_comments_number( get_the_ID() ); ?> comments</div>
-                   		  	</div><!-- .post_shortcode_text -->
-				                </a>
-                            </li>
-						<?php } ?>
+						<li class="ux-box text-center post-item ux-<?php echo $style; ?>">
+						    <div class="inner">
+						      <div class="inner-wrap">
+							    <a href="<?php the_permalink() ?>">
+							      <div class="ux-box-image">
+								        <div class="entry-image-attachment" style="max-height:<?php echo  $image_height; ?>;overflow:hidden;">
+											<?php the_post_thumbnail('medium'); ?>
+										</div>
+							      </div><!-- .ux-box-image -->
+							      <div class="ux-box-text text-vertical-center">
+							         	<h3 class="from_the_blog_title"><?php the_title(); ?></h3>
+							         	<div class="tx-div small"></div>
+							            <?php if($excerpt != 'false') { ?>
+								            <p class="from_the_blog_excerpt small-font show-next"><?php
+								                $excerpt = get_the_excerpt();
+								                echo string_limit_words($excerpt,15) . '[...]';
+								            ?>
+								     	   </p>
+								     	 <?php } ?>
+							           <p class="from_the_blog_comments uppercase smallest-font"><?php echo get_comments_number( get_the_ID() ); ?> comments</p>
+							        	
+							         </div><!-- .post_shortcode_text -->
+							    </a>
+
+								   <?php if($show_date != 'false') {?>
+											            <div class="post-date">
+												                <span class="post-date-day"><?php echo get_the_time('d', get_the_ID()); ?></span>
+												                <span class="post-date-month"><?php echo get_the_time('M', get_the_ID()); ?></span>
+												         </div>
+									<?php } ?>
+								</div><!-- .inner-wrap -->
+						    </div><!-- .inner -->
+						</li><!-- .blog-item -->
                           
                         <?php endwhile; // end of the loop. ?>
 

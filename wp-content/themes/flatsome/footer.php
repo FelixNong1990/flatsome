@@ -8,6 +8,7 @@
 global $flatsome_opt;
 ?>
 
+
 </div><!-- #main-content -->
 
 
@@ -72,14 +73,13 @@ global $flatsome_opt;
 
 <!-- back to top -->
 <a href="#top" id="top-link"><span class="icon-angle-up"></span></a>
-<div class="scroll-to-bullets"></div>
 
 <?php if(isset($flatsome_opt['html_scripts_footer'])){
 	// Insert footer scripts
 	echo $flatsome_opt['html_scripts_footer'];
 } ?>
 
-
+<div class="mob-helper"></div>
 <?php wp_footer(); ?>
 
 </body>

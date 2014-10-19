@@ -123,6 +123,12 @@ YToxMTc6e2k6MDtiOjA7czoxMjoic29jaWFsX2ljb25zIjthOjU6e3M6ODoiZmFjZWJvb2siO3M6MToi
 				$('#add-preset').slideDown();
 			});
 
+			$('select#featured_item_custom_link').change(function(){
+				$('button#of_save').one("click", function(){   
+					setTimeout(function(){$('button#of_save').click();}, 1000);
+				});
+			});
+
 			$('a.preset').click(function(){
 				var settings = $(this).find('textarea').val();
 				$('#export_data').val(settings);

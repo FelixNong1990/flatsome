@@ -907,8 +907,13 @@ width: 225px;
 }
 #of_container .controls .wp-picker-container .wp-color-result { outline: 0; }
 
+#section-top_right_text .explain, #section-top_right_text input,  #section-top_right_text .controls{
+ width:90%!important;
+}
+#section-top_right_text .explain{background: #FFF;color:#666!important;padding:10px!important;border:1px solid #eee;}
 
 /* UX */
+#section-theme_icons .screenshot{display: none!important}
 
 #of_container .controls .of-radio-img-selected {
 	border:3px solid #36577d

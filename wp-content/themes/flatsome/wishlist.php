@@ -74,9 +74,8 @@ if( function_exists('wc_print_notices') ) {
     <table class="shop_table cart wishlist_table" cellspacing="0">
         <thead>
         <tr>
-            <th class="product-remove"></th>
-            <th class="product-thumbnail"></th>
-            <th class="product-name"><span class="nobr"><?php _e( 'Product Name', 'yit' ) ?></span></th>
+           
+            <th class="product-name" colspan="3"><span class="nobr"><?php _e( 'Product Name', 'yit' ) ?></span></th>
             <?php if( get_option( 'yith_wcwl_price_show' ) == 'yes' ) : ?><th class="product-price"><span class="nobr"><?php _e( 'Unit Price', 'yit' ) ?></span></th><?php endif ?>
             <?php if( get_option( 'yith_wcwl_stock_show' ) == 'yes' ) : ?><th><span class="nobr"><?php _e( 'Stock Status', 'yit' ) ?></span></th><?php endif ?>
             <?php if( get_option( 'yith_wcwl_add_to_cart_show' ) == 'yes' ) : ?><th><span class="nobr"></th><?php endif ?>

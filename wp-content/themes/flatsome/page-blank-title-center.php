@@ -2,18 +2,20 @@
 /*
 Template name: Default Template (Center title)
 */
-get_header(); ?>
+get_header(); 
 
+?>
+
+<?php if( has_excerpt() ) { ?>
 <div class="page-header">
-<?php if( has_excerpt() ) the_excerpt();?>
+	<?php the_excerpt(); ?>
 </div>
-
+<?php } ?>
 
 <div  class="page-wrapper page-title-center">
 <div class="row">
 
-	
-<div id="content" class="large-12 left type-page  columns" role="main">
+<div id="content" class="large-12 columns" role="main">
 
 		<?php while ( have_posts() ) : the_post(); ?>
 					<header class="entry-header text-center">
@@ -33,10 +35,10 @@ get_header(); ?>
 
 		<?php endwhile; // end of the loop. ?>
 
-</div><!-- end #content large-9 left -->
 
-</div><!-- end row -->
-</div><!-- end page-right-sidebar container -->
+</div><!-- #content -->
 
+</div><!-- .row -->
+</div><!-- .page-wrapper -->
 
 <?php get_footer(); ?>

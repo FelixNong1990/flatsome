@@ -28,10 +28,11 @@ $products = new WP_Query( $args );
 
 
 if ( $products->have_posts() ) : ?>
-
-	<div class="related products">
-
-		<h2><?php _e( 'Related Products', 'woocommerce' ); ?></h2>
+<div class="related products">
+<?php // SLIDER 
+if(!isset($flatsome_opt['related_products_pr_row'])) $flatsome_opt['related_products_pr_row'] = '4';
+if($flatsome_opt['related_products'] == 'slider' || !isset($flatsome_opt['related_products'])){ ?>
+<h2><?php _e( 'Related Products', 'woocommerce' ); ?></h2>
 
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
@@ -90,7 +91,7 @@ if ( $products->have_posts() ) : ?>
 
 		<div class="row column-slider">
             <div id="slider_related" class="iosSlider" style="overflow:hidden;height:330px;min-height:330px;">
-                <ul class="slider large-block-grid-4 small-block-grid-2">
+                <ul class="slider large-block-grid-<?php echo $flatsome_opt['related_products_pr_row']; ?> small-block-grid-2">
 
 							<?php while ( $products->have_posts() ) : $products->the_post(); ?>
 
@@ -109,11 +110,21 @@ if ( $products->have_posts() ) : ?>
 			
        		</div> <!-- .iOsslider -->
     </div><!-- .row .column-slider -->
-
-
-	
-
 	</div>
+<? } // GRID
+else if($flatsome_opt['related_products'] == 'grid'){ ?>
+<h2><?php _e( 'Related Products', 'woocommerce' ); ?></h2>
+
+                <ul class="products large-block-grid-4 small-block-grid-2">
+
+							<?php while ( $products->have_posts() ) : $products->the_post(); ?>
+
+								<?php woocommerce_get_template_part( 'content', 'product' ); ?>
+
+							<?php endwhile; // end of the loop. ?>
+
+                </ul>   <!-- .slider -->  
+<?php } else{ } ?>
 
 <?php endif;
 

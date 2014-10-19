@@ -20,7 +20,7 @@ if(isset($flatsome_opt['blog_header'])){ echo do_shortcode($flatsome_opt['blog_h
 		 } else if($flatsome_opt['blog_layout'] == 'right-sidebar'){
 		 	echo '<div id="content" class="large-9 left columns" role="main">';
 		 } else if($flatsome_opt['blog_layout'] == 'no-sidebar'){
-		 	echo '<div id="content" class="large-10 columns large-offset-1" role="main">';
+		 	echo '<div id="content" class="large-12 columns" role="main">';
 		 } else {
 		 	echo '<div id="content" class="large-9 left columns" role="main">';
 		 }

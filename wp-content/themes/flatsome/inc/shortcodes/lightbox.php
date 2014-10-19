@@ -7,21 +7,28 @@ function uxLightboxShortcode($atts, $content=null) {
         'id' => 'enter-id-here',
         'width' => '600px',
         'padding' => '20px',
+        'button' => '',
+        'button_text' => '',
     ), $atts ) );
     ?> 
 
 <div id="<?php echo $id; ?>" class="mfp-hide my-mfp-zoom-in lightbox-white" style="max-width:<?php echo $width ?>;padding:<?php echo $padding; ?>">
-    <?php echo do_shortcode($content); ?>
+    <?php echo fixShortcode($content); ?>
 </div><!-- Lightbox-<?php echo $id; ?> -->
 
 <script>
 jQuery(document).ready(function($) {
    $('a[href="#<?php echo $id; ?>"]').addClass('open-popup-link-<?php echo $id; ?>');
+   
     $('.open-popup-link-<?php echo $id; ?>').magnificPopup({
        type:'inline',
        midClick: true,
        mainClass: 'my-mfp-zoom-in product-zoom-lightbox',
-       removalDelay: 300,
+       removalDelay: 300
+    });
+
+    $('.open-popup-link-<?php echo $id; ?>').click(function(e){
+      e.preventDefault();
     });
 });
 </script>
@@ -31,4 +38,3 @@ jQuery(document).ready(function($) {
     return $content;
 }
 add_shortcode("lightbox", "uxLightboxShortcode");
-?>

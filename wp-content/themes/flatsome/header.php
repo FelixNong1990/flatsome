@@ -24,6 +24,8 @@ global $flatsome_opt;
 
 	<?php wp_head(); ?>
 </head>
+<!-- loading -->
+
 
 <body <?php body_class(); ?>>
 
@@ -31,8 +33,8 @@ global $flatsome_opt;
 // HTML Homepage Before Header // Set in Theme Option > HTML Blocks
 if($flatsome_opt['html_intro'] && is_front_page()) echo '<div class="home-intro">'.do_shortcode($flatsome_opt['html_intro']).'</div>' ?>
 
-	<div id="wrapper">
-		<div class="header-wrapper">
+	<div id="wrapper"<?php if($flatsome_opt['box_shadow']) echo ' class="box-shadow"';?>>
+		<div class="header-wrapper before-sticky">
 		<?php do_action( 'before' ); ?>
 		<?php if(!isset($flatsome_opt['topbar_show']) || $flatsome_opt['topbar_show']){ ?>
 		<div id="top-bar">
@@ -69,7 +71,6 @@ if($flatsome_opt['html_intro'] && is_front_page()) echo '<div class="home-intro"
 		<?php }?>
 
 
-		<div class="sticky-wrapper">
 		<header id="masthead" class="site-header" role="banner">
 			<div class="row"> 
 				<div class="large-12 columns header-container">
@@ -81,6 +82,11 @@ if($flatsome_opt['html_intro'] && is_front_page()) echo '<div class="home-intro"
 							<?php if($flatsome_opt['site_logo']){
 								$site_title = esc_attr( get_bloginfo( 'name', 'display' ) );
 								echo '<img src="'.$flatsome_opt['site_logo'].'" class="header_logo" alt="'.$site_title.'"/>';
+								if ( is_page_template( 'page-transparent-header-light.php' )) {
+								  if($flatsome_opt['site_logo_dark']){
+								  	echo '<img src="'.$flatsome_opt['site_logo_dark'].'" class="header_logo_dark" alt="'.$site_title.'"/>';
+								  }
+								}
 							} else {bloginfo( 'name' );}?>
 						</a>
 					</div><!-- .logo -->
@@ -131,7 +137,7 @@ if($flatsome_opt['html_intro'] && is_front_page()) echo '<div class="home-intro"
 		                            <li>Define your main navigation in <b>Apperance > Menus</b></li>
 		                        <?php endif; ?>								
 							</ul>
-						<?php } else { ?>
+						<?php } else if($flatsome_opt['nav_position'] == 'bottom' || $flatsome_opt['nav_position'] == 'bottom_center') { ?>
  
 						<div class="wide-nav-search hide-for-small">
 							<?php if($flatsome_opt['search_pos'] == 'left'){ ?>
@@ -159,6 +165,11 @@ if($flatsome_opt['html_intro'] && is_front_page()) echo '<div class="home-intro"
 							<?php if($flatsome_opt['site_logo']){
 								$site_title = esc_attr( get_bloginfo( 'name', 'display' ) );
 								echo '<img src="'.$flatsome_opt['site_logo'].'" class="header_logo" alt="'.$site_title.'"/>';
+								if ( is_page_template( 'page-transparent-header-light.php' )) {
+								  if($flatsome_opt['site_logo_dark']){
+								  	echo '<img src="'.$flatsome_opt['site_logo_dark'].'" class="header_logo_dark" alt="'.$site_title.'"/>';
+								  }
+								}
 							} else {bloginfo( 'name' );}?>
 						</a>
 					</div><!-- .logo -->
@@ -166,7 +177,49 @@ if($flatsome_opt['html_intro'] && is_front_page()) echo '<div class="home-intro"
 
 					<div class="right-links">
 						<?php if(!$flatsome_opt['catalog_mode']) { ?> 
-						<ul class="header-nav">
+						<ul <?php if($flatsome_opt['nav_position'] == 'top_right'){ ?>id="site-navigation"<?php } ?> class="header-nav">
+							
+						<?php if($flatsome_opt['nav_position'] == 'top_right'){ ?>
+								<?php if ( has_nav_menu( 'primary' ) ) { ?>
+								
+								<?php if (!isset($flatsome_opt['search_pos']) || $flatsome_opt['search_pos'] == 'left') { ?>
+								<li class="search-dropdown">
+									<a href="#" class="nav-top-link icon-search" onClick="return false;"></a>
+									<div class="nav-dropdown">
+										<?php if(function_exists('get_product_search_form')) {
+											get_product_search_form();
+										} else {
+											get_search_form();
+										} ?>	
+									</div><!-- .nav-dropdown -->
+								</li><!-- .search-dropdown -->
+								<?php } ?>
+
+									<?php  
+									wp_nav_menu(array(
+										'theme_location' => 'primary',
+										'container'       => false,
+										'items_wrap'      => '%3$s',
+										'depth'           => 0,
+										'walker'          => new FlatsomeNavDropdown
+									));
+								?>
+
+								<?php if (isset($flatsome_opt['search_pos']) && $flatsome_opt['search_pos'] == 'right') { ?>
+								<li class="search-dropdown">
+									<a href="#" class="nav-top-link icon-search"></a>
+									<div class="nav-dropdown">
+										<?php if(function_exists('get_product_search_form')) {
+											get_product_search_form();
+										} else {
+											get_search_form();
+										} ?>		
+									</div><!-- .nav-dropdown -->
+								</li><!-- .search-dropdown -->
+								<?php } ?>
+		                    <?php } ?>		
+		                   	<?php } // primary-nav right style ?>
+
 							<?php if($flatsome_opt['top_right_text']) { ?>
 							<li class="html-block">
 								<div class="html-block-inner hide-for-small"><?php echo do_shortcode($flatsome_opt['top_right_text']); ?></div>
@@ -203,7 +256,6 @@ if($flatsome_opt['html_intro'] && is_front_page()) echo '<div class="home-intro"
 						?>						
 						</li>
 					<?php } ?>
-		
 
 					<!-- Show mini cart if Woocommerce is activated -->
 					<?php if(!isset($flatsome_opt['show_cart']) || $flatsome_opt['show_cart'] == 1) { ?>
@@ -255,7 +307,6 @@ if($flatsome_opt['html_intro'] && is_front_page()) echo '<div class="home-intro"
 
 
 </header><!-- .header -->
-</div><!-- .sticky-wrapper -->
 
 <?php if($flatsome_opt['nav_position'] == 'bottom' || $flatsome_opt['nav_position'] == 'bottom_center') { ?>
 <!-- Main navigation - Full width style -->
@@ -316,17 +367,18 @@ if($flatsome_opt['html_intro'] && is_front_page()) echo '<div class="home-intro"
 <?php } ?>
 </div><!-- .header-wrapper -->
 
-
-<?php if(isset($flatsome_opt['html_after_header'])){
-	// AFTER HEADER HTML BLOCK
-	echo do_shortcode($flatsome_opt['html_after_header']);
-} ?>
-
-<div id="main-content" class="site-main <?php echo $flatsome_opt['content_color']; ?>">
+<div id="main-content" class="site-main  <?php echo $flatsome_opt['content_color']; ?>">
 <?php 
 //adds a border line if header is white
-if (strpos($flatsome_opt['header_bg'],'#fff') !== false || $flatsome_opt['nav_position'] == 'top') {
+if (strpos($flatsome_opt['header_bg'],'#fff') !== false && $flatsome_opt['nav_position'] == 'top') {
 		  echo '<div class="row"><div class="large-12 columns"><div class="top-divider"></div></div></div>';
+} ?>
+
+<?php if($flatsome_opt['html_after_header']){
+	// AFTER HEADER HTML BLOCK
+	echo '<div class="block-html-after-header" style="position:relative;top:-1px;">';
+	echo do_shortcode($flatsome_opt['html_after_header']);
+	echo '</div>';
 } ?>
 
 <!-- woocommerce message -->

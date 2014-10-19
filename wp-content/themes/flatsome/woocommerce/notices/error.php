@@ -13,7 +13,7 @@ if ( ! $messages ) return;
 ?>
 <div class="row">
 <div class="large-12 columns">
-<div class="alert-box alert animated fadeIn">
+<div class="alert-box alert animated fadeIn woocommerce-error">
 	<ul class="error-messages">
 		<?php foreach ( $messages as $message ) : ?>
 			<li><?php echo wp_kses_post( $message ); ?></li>

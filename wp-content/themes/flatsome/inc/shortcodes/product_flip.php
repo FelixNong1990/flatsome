@@ -10,11 +10,13 @@ function ux_product_flip($atts, $content = null) {
 	$sliderrandomid = rand();
 	extract(shortcode_atts(array(
 		'products'  => '8',
-    'height' => '600',
+    'height' => '510px',
     'cat' => '',
 
 	), $atts));
 	ob_start();
+
+ if(!strpos($height,'px') !== false) { $height = $height.'px';}
 
    $args = array(
             'post_type' => 'product',
@@ -23,14 +25,14 @@ function ux_product_flip($atts, $content = null) {
             'products' => $products
         );
 	?>
-<div class="container">
+<div class="flip-container" style="height:<?php echo $height+20;?>px;overflow:hidden;">
   <div class="row">
     <div class="large-12 columns">
       <div id="flipRoot" class="flipContainer">
             <?php if($content) { ?>
             <div class="row-collapse flip-slide">
               <div class="large-12 columns">
-                 <?php echo do_shortcode($content); ?>
+                 <?php echo fixShortcode($content); ?>
               </div><!-- large-6 -->
              </div><!-- row -->
              <?php } ?>
@@ -39,7 +41,7 @@ function ux_product_flip($atts, $content = null) {
                   $products = new WP_Query( $args );
                   if ( $products->have_posts() ) : ?>
                       <?php while ( $products->have_posts() ) : $products->the_post(); ?>
-                       <div class="row-collapse">
+                       <div class="row collapse">
                           <?php woocommerce_get_template_part( 'content', 'product-flipbook' ); ?>
                         </div>
                       <?php endwhile; // end of the loop. ?>
@@ -54,15 +56,16 @@ function ux_product_flip($atts, $content = null) {
 	<script type="text/javascript">
 	jQuery(document).ready(function($) {
 			 $("#flipRoot").flip({
-        height: '<?php echo $height."px"; ?>',
+        height: '<?php echo $height;?>',
+        forwardDir: 'ltor',
         showPager: true,
-        loop: false
+        loop: true
       });
 	});
-
 	</script>
   <style>
 /* -- product flip --*/
+  .flipShadow{display: none!important}
   .flipContainer{position:relative;-webkit-perspective:3000px;-moz-perspective:3000px;perspective:3000px;-webkit-user-select:none;-moz-user-select:none;user-select:none}
   .flipContent{position:absolute;top:0;left:0;height:100%;width:100%;display:none;overflow:hidden}
   .flipContent.flipCurrent{display:block}
@@ -87,8 +90,6 @@ function ux_product_flip($atts, $content = null) {
   .flipContainer .entry-title{padding:15px 50px 0 0;}
   .flipContainer .button{margin-top: 15px;}
 </style>
-
-
 	<?php
 	$content = ob_get_contents();
 	ob_end_clean();

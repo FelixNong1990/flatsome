@@ -9,7 +9,7 @@ function ux_shortcode_button() {
     return;
     }
     // verify the post type
-    if( ! in_array( $typenow, array( 'post', 'page','blocks' ) ) )
+    if( ! in_array( $typenow, array( 'post', 'page', 'blocks', 'product' ) ) )
         return;
     // check if WYSIWYG is enabled
     if ( get_user_option('rich_editing') == 'true') {

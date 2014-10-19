@@ -141,9 +141,12 @@ function of_save_options($data, $key = null) {
 			}
 	  	}
 	}
+
+
     do_action('of_save_options_after', array(
 		'key'=>$key, 'data'=>$data
 	));
+
 
 }
 

@@ -6,6 +6,7 @@
 global $flatsome_opt;
 ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+	<?php if($flatsome_opt['blog_post_style'] == 'default' || !isset($flatsome_opt['blog_post_style'])) { ?> 
 	<header class="entry-header text-center">
 		<h1 class="entry-title"><?php the_title(); ?></h1>
 		<div class="tx-div small"></div>
@@ -13,6 +14,7 @@ global $flatsome_opt;
 			<?php flatsome_posted_on(); ?>
 		</div><!-- .entry-meta -->
 	</header><!-- .entry-header -->
+	
 
 	<?php if ( has_post_thumbnail() ) { // check if the post has a Post Thumbnail assigned to it. ?>
     <div class="entry-image">
@@ -24,6 +26,7 @@ global $flatsome_opt;
 	                <span class="post-date-month"><?php echo get_the_time('M', get_the_ID()); ?></span>
             </div>
     </div>
+    <?php } ?>
     <?php } ?>
 
 	<div class="entry-content">

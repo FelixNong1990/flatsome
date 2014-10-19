@@ -11,7 +11,6 @@ function button_shortcode( $atts, $content = null ){
 
 if($target) $target = 'target="'.$target.'"';
 return '<a href="'.$link.'" class="button '.$size.' '.$style.'" '.$target.'>'.$text.'</a>';
-
 }
 add_shortcode('button', 'button_shortcode');
 
@@ -23,9 +22,7 @@ function facebook_login_shortcode( $atts, $content = null ){
   ), $atts ) );
   	ob_start();
   	global $post;
-?>
-<a href="<?php echo wp_login_url(); ?>?loginFacebook=1&redirect=<?php echo the_permalink(); ?>"  class="button <?php echo $size; ?> facebook-button" onclick="window.location = '<?php echo wp_login_url(); ?>?loginFacebook=1&redirect='+window.location.href; return false;"><i class="icon-facebook"></i><?php echo $text; ?></a>
-<?php
+?><a href="<?php echo wp_login_url(); ?>?loginFacebook=1&redirect=<?php echo the_permalink(); ?>"  class="button <?php echo $size; ?> facebook-button" onclick="window.location = '<?php echo wp_login_url(); ?>?loginFacebook=1&redirect='+window.location.href; return false;"><i class="icon-facebook"></i><?php echo $text; ?></a><?php
 $content = ob_get_contents();
 ob_end_clean();
 return $content;

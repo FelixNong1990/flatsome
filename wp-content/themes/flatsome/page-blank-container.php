@@ -4,13 +4,15 @@ Template name: Default Template (No title)
 */
 get_header(); ?>
 
+<?php if( has_excerpt() ) { ?>
 <div class="page-header">
-<?php if( has_excerpt() ) the_excerpt();?>
+	<?php the_excerpt(); ?>
 </div>
+<?php } ?>
 
 <div  class="page-wrapper">
 <div class="row">
-<div id="content" class="large-12 left columns" role="main">
+<div id="content" class="large-12 columns" role="main">
 
 		
 			<?php while ( have_posts() ) : the_post(); ?>
@@ -19,10 +21,8 @@ get_header(); ?>
 			
 			<?php endwhile; // end of the loop. ?>
 
-</div><!-- end #content large-9 left -->
-
-</div><!-- end row -->
-</div><!-- end page-right-sidebar container -->
-
+</div><!-- #content -->
+</div><!-- .row  -->
+</div><!-- .page-wrapper -->
 
 <?php get_footer(); ?>

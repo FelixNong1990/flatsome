@@ -84,7 +84,7 @@ function shortcode_map($atts, $content=null, $code) {
             <div class="row">
             <div class="large-4 columns right">
                 <div class="map_inner">
-                <?php echo do_shortcode($content); ?>
+                <?php echo fixShortcode($content); ?>
               </div> <!-- map_inner -->
             </div><!-- large-4 -->
              </div><!-- row -->

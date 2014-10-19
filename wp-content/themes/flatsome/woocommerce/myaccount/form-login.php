@@ -80,10 +80,14 @@ global $woocommerce,$flatsome_opt; ?>
 				<input type="email" class="input-text" name="email" id="reg_email" value="<?php if ( ! empty( $_POST['email'] ) ) esc_attr_e( $_POST['email'] ); ?>" />
 			</p>
 
+			<?php if ( 'no' === get_option( 'woocommerce_registration_generate_password' ) ) : ?>
+			
 			<p class="form-row form-row-wide">
 				<label for="reg_password"><?php _e( 'Password', 'woocommerce' ); ?> <span class="required">*</span></label>
 				<input type="password" class="input-text" name="password" id="reg_password" value="<?php if ( ! empty( $_POST['password'] ) ) esc_attr_e( $_POST['password'] ); ?>" />
 			</p>
+
+			<?php endif; ?>
 
 			<!-- Spam Trap -->
 			<div style="left:-999em; position:absolute;"><label for="trap"><?php _e( 'Anti-spam', 'woocommerce' ); ?></label><input type="text" name="email_2" id="trap" tabindex="-1" /></div>

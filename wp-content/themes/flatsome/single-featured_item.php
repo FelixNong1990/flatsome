@@ -32,22 +32,26 @@ get_header(); ?>
 <div  class="large-9 right columns" >
 <div class="page-inner">
 		<?php while ( have_posts() ) : the_post(); ?>
-				<?php the_content(); ?>
-		<?php endwhile; // end of the loop. ?>
+				<?php if(get_the_content()) {the_content();} else {
+					the_post_thumbnail('large');
+				}; ?>
+		<?php endwhile; wp_reset_query(); // end of the loop. ?>
 </div><!-- .page-inner -->
 </div><!-- .#content large-9 left -->
 
 </div><!-- .row -->
 </div><!-- -page-right-sidebar .container -->
 
+<div class="row"><div class="large-12 columns"><hr></div></div>
 
 <?php 
 // RELATED SLIDER
 global $flatsome_opt;
 $cat = get_the_terms( get_the_ID(), 'featured_item_category', '', ', ', '' );
-if($flatsome_opt['featured_items_related'] == 'style1') {
+
+if(!isset($flatsome_opt['featured_items_related']) || $flatsome_opt['featured_items_related'] == 'default') {
 	echo do_shortcode('[featured_items_slider style="1" height="'.$flatsome_opt['featured_items_related_height'].'" cat="'.current($cat)->slug.'"]');
-} elseif($flatsome_opt['featured_items_related'] == 'style2') {
+} else if($flatsome_opt['featured_items_related'] == 'text_overlay') {
 	echo do_shortcode('[featured_items_slider style="2" height="'.$flatsome_opt['featured_items_related_height'].'" cat="'.current($cat)->slug.'"]');
 }
 ?>

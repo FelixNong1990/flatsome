@@ -2,15 +2,20 @@
 
 /* CONTENT */
 
-/* - Extra body classes */
+/* - Extra body classes 
 /* - Filter for next/previous image links 
-/* - Custom metabox for Product Categories
+/* - Custom metaboxes for Product Categories
 /* - Extra editor styles
+/* - Shorter Exerpt
+/* - Shortcode fixer
+/* - Hex 2 Rgb
+/* - Set default WooCommerce images
+/* - WooCommerc extra tabs
+/* - Enable SVG upload
 
 /**
  * Adds custom classes to the array of body classes.
  */
-
 
 function flatsome_body_classes( $classes ) {
 	global $flatsome_opt;
@@ -25,8 +30,9 @@ function flatsome_body_classes( $classes ) {
 	// adds dark header class
 	if($flatsome_opt['header_color'] == 'dark'){
 		$classes[] = 'dark-header';
-	}
-
+    $classes[] = 'org-dark-header';
+  }
+  
 	// add stikcy header class
 	if($flatsome_opt['header_sticky'] && !isset($_GET["shortcode"])){
 		$classes[] = 'sticky_header';
@@ -58,6 +64,24 @@ function flatsome_body_classes( $classes ) {
 	if($flatsome_opt['body_bg_image']){
 		$classes[] = $flatsome_opt['body_bg_type'];
 	}
+
+  if ( is_page_template( 'page-transparent-header-light.php' ) || is_page_template( 'page-transparent-header.php' ) || is_page_template( 'page-boxed-header.php' )) {
+    $classes[] = 'transparent-header';
+  }
+
+  if ( is_page_template( 'page-transparent-header-light.php' )) {
+    $classes[] = 'has-dark-header';
+    $classes[] = 'dark-header';
+  }
+
+   if ( is_page_template( 'page-blank-header.php' )) {
+    $classes[] = 'hide-header';
+  }
+
+    if ( is_page_template( 'page-boxed-header.php' )) {
+    $classes[] = 'boxed-header';
+  }
+
 
 	return $classes;
 }
@@ -109,7 +133,7 @@ add_filter( 'wp_title', 'flatsome_wp_title', 10, 2 );
 
 /* ADD CUSTOM META BOX TO CATEGORY PAGES */
 if(function_exists('get_term_meta')){
-function pippin_taxonomy_edit_meta_field($term) {
+function top_text_taxonomy_edit_meta_field($term) {
 	// put the term ID into a variable
 	$t_id = $term->term_id;
 	// retrieve the existing value(s) for this meta field. This returns an array
@@ -117,18 +141,40 @@ function pippin_taxonomy_edit_meta_field($term) {
 	if(!$term_meta){$term_meta = add_term_meta($t_id, 'cat_meta', '');}
 	 ?>
 	<tr class="form-field">
-	<th scope="row" valign="top"><label for="term_meta[cat_header]"><?php _e( 'Top Content', 'pippin' ); ?></label></th>
+	<th scope="row" valign="top"><label for="term_meta[cat_header]"><?php _e( 'Top Content', 'flatsome' ); ?></label></th>
 		<td>				
 				<?php 
 
 				$content = esc_attr( $term_meta[0]['cat_header'] ) ? esc_attr( $term_meta[0]['cat_header'] ) : ''; 
 				echo '<textarea id="term_meta[cat_header]" name="term_meta[cat_header]">'.$content.'</textarea>'; ?>
-			<p class="description"><?php _e( 'Enter a value for this field. Shortcodes are allowed. This will be displayed at top of the category.','pippin' ); ?></p>
+			<p class="description"><?php _e( 'Enter a value for this field. Shortcodes are allowed. This will be displayed at top of the category.','flatsome' ); ?></p>
 		</td>
 	</tr>
 <?php
 }
-add_action( 'product_cat_edit_form_fields', 'pippin_taxonomy_edit_meta_field', 10, 2 );
+add_action( 'product_cat_edit_form_fields', 'top_text_taxonomy_edit_meta_field', 10, 2 );
+
+/* ADD CUSTOM META BOX TO CATEGORY PAGES */
+function bottom_text_taxonomy_edit_meta_field($term) {
+  // put the term ID into a variable
+  $t_id = $term->term_id;
+  // retrieve the existing value(s) for this meta field. This returns an array
+  $term_meta = get_term_meta($t_id,'cat_meta');
+  if(!$term_meta){$term_meta = add_term_meta($t_id, 'cat_meta', '');}
+   ?>
+  <tr class="form-field">
+  <th scope="row" valign="top"><label for="term_meta[cat_footer]"><?php _e( 'Bottom Content', 'flatsome' ); ?></label></th>
+    <td>        
+        <?php 
+
+        $content = esc_attr( $term_meta[0]['cat_footer'] ) ? esc_attr( $term_meta[0]['cat_footer'] ) : ''; 
+        echo '<textarea id="term_meta[cat_footer]" name="term_meta[cat_footer]">'.$content.'</textarea>'; ?>
+      <p class="description"><?php _e( 'Enter a value for this field. Shortcodes are allowed. This will be displayed at bottom of the category.','flatsome' ); ?></p>
+    </td>
+  </tr>
+<?php
+}
+add_action( 'product_cat_edit_form_fields', 'bottom_text_taxonomy_edit_meta_field', 10, 2 );
 
 
 /* SAVE CUSTOM META*/
@@ -162,15 +208,110 @@ function my_mce_buttons_2( $buttons ) {
 }
 
 
-add_filter( 'tiny_mce_before_init', 'my_mce_before_init' );
-function my_mce_before_init( $settings ) {
+add_filter( 'tiny_mce_before_init', 'ux_formats_before_init' );
+function ux_formats_before_init( $settings ) {
 
     $style_formats = array(
 
+        array(
+              'title' => 'Link styles',
+                  'items' => array(
+                  array(
+                      'title' => 'Button Primary',
+                       'selector' => 'a',
+                       'classes' => 'button primary',
+                  ),
+                    array(
+                      'title' => 'Button White',
+                       'selector' => 'a',
+                       'classes' => 'button white',
+                  ),
+                  array(
+                       'title' => 'Button Secondary',
+                       'selector' => 'a',
+                       'classes' => 'button secondary',
+               
+                  ),
+                  array(
+                       'title' => 'Button Alert',
+                       'selector' => 'a',
+                       'classes' => 'button alert',
+               
+                  ),
+                  array(
+                       'title' => 'Button Success',
+                       'selector' => 'a',
+                       'classes' => 'button success',
+               
+                  ),
+                  array(
+                       'title' => 'Button Alternative Primary',
+                       'selector' => 'a',
+                       'classes' => 'button alt-button',
+               
+                  ),
+                   array(
+                       'title' => 'Button Alternative White',
+                       'selector' => 'a',
+                       'classes' => 'button alt-button white',
+               
+                  ),
+                        array(
+                      'title' => 'Large - Button Primary',
+                       'selector' => 'a',
+                       'classes' => 'button large  primary',
+                  ),
+                  array(
+                       'title' => 'Large Button Secondary',
+                       'selector' => 'a',
+                       'classes' => 'button large  secondary',
+               
+                  ),
+                  array(
+                       'title' => 'Large Button Alert',
+                       'selector' => 'a',
+                       'classes' => 'button large  alert',
+               
+                  ),
+                  array(
+                       'title' => 'Large Button Success',
+                       'selector' => 'a',
+                       'classes' => 'button large  success',
+               
+                  ),
+                  array(
+                       'title' => 'Large Button Alternative Primary',
+                       'selector' => 'a',
+                       'classes' => 'button large  alt-button success',
+               
+                  ),
+                  array(
+                       'title' => 'Large Button Alternative Secondary',
+                       'selector' => 'a',
+                       'classes' => 'button large  alt-button secondary',
+               
+                  ),
+                   array(
+                       'title' => 'Large Button Alternative White',
+                       'selector' => 'a',
+                       'classes' => 'button large alt-button white',
+               
+                  )
+              )
+        ),
+
+       array(
+          'title' => 'Pull text inn',
+          'selector' => 'p',
+          'classes' => 'text-pull-inn',
+          'exact' => 'true',
+  
+        ),
     	  array(
           'title' => 'Paragraph - Lead',
           'selector' => 'p',
           'classes' => 'lead',
+          'exact' => 'true',
   
         ),
 
@@ -178,6 +319,7 @@ function my_mce_before_init( $settings ) {
           'title' => 'Paragraph - Lead, Centered',
           'selector' => 'p',
           'classes' => 'lead text-center',
+          'exact' => 'true',
   
         ),
 
@@ -191,6 +333,12 @@ function my_mce_before_init( $settings ) {
           'title' => 'Thin Font',
           'selector' => '*',
           'classes' => 'thin-font',
+        ),
+
+         array(
+          'title' => 'Hide on Mobile screens',
+          'selector' => '*',
+          'classes' => 'hide-for-small',
         ),
 
         array(
@@ -252,7 +400,53 @@ function my_mce_before_init( $settings ) {
           'selector' => '*',
           'classes' => 'text-bordered-dark',
   
+        )
+          ,
+          array(
+          'title' => 'Text Border Top and Bottom White',
+          'selector' => '*',
+          'classes' => 'text-boarder-top-bottom-white',
+  
+        )
+          ,
+          array(
+          'title' => 'Text Border Top and Bottom Dark',
+          'selector' => '*',
+          'classes' => 'text-boarder-top-bottom-dark',
+  
+        ), 
+          array(
+          'title' => 'Tilt Left',
+          'selector' => '*',
+          'classes' => 'tilt-left',
+  
         ),
+          array(
+          'title' => 'Text Border Top and Bottom Dark',
+          'selector' => '*',
+          'classes' => 'tilt-right',
+  
+        )
+         ,
+        array(
+          'title' => 'Bullets List - Check mark',
+          'selector' => 'li',
+          'classes' => 'bullet-checkmark',
+  
+        ),
+        array(
+          'title' => 'Bullets List - Arrow',
+          'selector' => 'li',
+          'classes' => 'bullet-arrow',
+  
+        ),
+        array(
+          'title' => 'Bullets List - Star',
+          'selector' => 'li',
+          'classes' => 'bullet-star',
+  
+        ),
+
         array(
           'title' => 'Text shadow',
           'selector' => '*',
@@ -289,12 +483,6 @@ function my_mce_before_init( $settings ) {
 
 }
 
-function add_my_editor_style() {
-  add_editor_style();
-}
-add_action( 'admin_init', 'add_my_editor_style' );
-
-
 
 /* Add HTML after Short description */
 if($flatsome_opt['html_before_add_to_cart']){
@@ -326,29 +514,24 @@ if($flatsome_opt['html_cart_footer']){
 
 /* SHORTCODE FIX */
 function fixShortcode($content){
-      $fix = array (
+    $fix = array (
           					    '_____' => '<div class="tx-div large"></div>',
     		                '____' => '<div class="tx-div medium"></div>',
     		                '___' => '<div class="tx-div small"></div>',
-                        '<br>' => '', 
-                        '<br/>' => '', 
-                        '&nbsp;' => '', 
-                        '<p>' => '', 
-                        '</p>' => '', 
-                        '<p></p>' => '', 
-                        '<p>[' => '[', 
-                        ']</p>' => ']', 
                         ']<br />' => ']',
-                        '////' => '<div class="clearfix"></div>',
-                        '///' => '<div class="clearfix"></div>',
-       );
+                        '<br />[' => '[',
+                        '<br>' => '',
+    );
     $content = strtr($content, $fix);
-    echo do_shortcode( $content );
+    $content = wpautop( preg_replace( '/<\/?p\>/', "\n", $content ) . "\n" );
+
+
+    return do_shortcode( shortcode_unautop( $content) );
 }
 
 
 /* EDITOR COLORS */
-function my_mce4_options( $init ) {
+function ux_mce4_options( $init ) {
 global $flatsome_opt;
 $default_colours = '
     "000000", "Black",        "993300", "Burnt orange", "333300", "Dark olive",   "003300", "Dark green",   "003366", "Dark azure",   "000080", "Navy Blue",      "333399", "Indigo",       "333333", "Very dark gray", 
@@ -363,23 +546,9 @@ $custom_colours = '
 $init['textcolor_map'] = '['.$custom_colours.','.$default_colours.']';
 return $init;
 }
-add_filter('tiny_mce_before_init', 'my_mce4_options');
+add_filter('tiny_mce_before_init', 'ux_mce4_options');
 
-/* Facebook meta tags */
-if($flatsome_opt['facebook_meta'] && !is_home() && !is_shop()) {
-function share_meta_head() {
-	global $post; ?>
-  	<!-- Facebook Share Meta -->
-	<meta property="og:title" content="<?php the_title(); ?>" />
-	<?php if (has_post_thumbnail( $post->ID ) ): ?>
-	<?php $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' ); ?>
-	<meta property="og:image" content="<?php echo $image[0]; ?>" />
-	<?php endif; ?>
-	<meta property="og:url" content="<?php the_permalink(); ?>" />
-<?php 
-}
-add_action('wp_head', 'share_meta_head');
-}
+
 
 /* Shorter exerpt */
 function short_excerpt($limit) {
@@ -409,7 +578,7 @@ function short_excerpt($limit) {
 }
 
 /* HEX TO RGB */
-function hex2rgba($color, $opacity = false) {
+function ux_hex2rgba($color, $opacity = false) {
 	$default = 'rgb(0,0,0)';
 	//Return default if no color provided
 	if(empty($color))
@@ -445,9 +614,92 @@ function hex2rgba($color, $opacity = false) {
 }
 
 
-/* AJAX FIX */
-add_filter('sod_ajax_layered_nav_product_container', 'ux_product_container');
-function ux_product_container($product_container){
-//Enter either the class or id of the container that holds your products
-return 'ul.products';
+/* SETUP DEFAULT WOOCOMMERCE IMAGE SIZES */
+global $pagenow;
+if ( is_admin() && isset( $_GET['activated'] ) && $pagenow == 'themes.php' ) add_action( 'init', 'flatsome_woocommerce_image_dimensions', 1 );
+
+function flatsome_woocommerce_image_dimensions() {
+    $catalog = array(
+    'width'   => '247', // px
+    'height'  => '300', // px
+    'crop'    => 1    // true
+  );
+
+  $single = array(
+    'width'   => '510', // px
+    'height'  => '600', // px
+    'crop'    => 1    // true
+  );
+
+  $thumbnail = array(
+    'width'   => '114', // px
+    'height'  => '130', // px
+    'crop'    => 1    // false
+  );
+
+
+// Catalog Image sizes
+  update_option( 'shop_catalog_image_size', $catalog );     // Product category thumbs
+  update_option( 'shop_single_image_size', $single );     // Single product image
+  update_option( 'shop_thumbnail_image_size', $thumbnail );   // Image gallery thumbs
 }
+
+
+/* ajax navigation fix */
+add_filter('_ajax_layered_nav_containers', 'ux_add_custom_container');
+function ux_add_custom_container($containers){
+$containers[] = '.woocommerce-pagination';
+$containers[] = '.woocommerce-result-count';
+return $containers;
+}
+
+
+add_filter('sod_ajax_layered_nav_product_container', 'aln_product_container');
+function aln_product_container($product_container){
+//Enter either the class or id of the container that holds your products
+return '.products';
+}
+
+
+/* WooCommerce extra tabs */
+add_filter( 'woocommerce_product_tabs', 'woo_new_product_tab' );
+function woo_new_product_tab( $tabs ) {
+  global $wc_cpdf, $flatsome_opt;
+  // Adds the new tab
+  if($wc_cpdf->get_value(get_the_ID(), '_custom_tab_title')){
+  $tabs['ux_custom_tab'] = array(
+    'title'   => __(  $wc_cpdf->get_value(get_the_ID(), '_custom_tab_title'), 'flatsome' ),
+    'priority'  => 40,
+    'callback'  => 'ux_custom_tab_content'
+  );
+  }
+
+  if($flatsome_opt['tab_title']){
+  $tabs['ux_global_tab'] = array(
+    'title'   => __($flatsome_opt['tab_title'], 'flatsome' ),
+    'priority'  => 50,
+    'callback'  => 'ux_global_tab_content'
+  );
+  }
+ 
+  return $tabs;
+ 
+}
+function ux_custom_tab_content() {
+  // The new tab content
+  global $wc_cpdf;
+  echo do_shortcode($wc_cpdf->get_value(get_the_ID(), '_custom_tab'));
+}
+
+function ux_global_tab_content() {
+  // The new tab content
+  global $flatsome_opt;
+  echo do_shortcode($flatsome_opt['tab_content']);
+}
+
+/* Enable SVG upload */
+function ux_enable_svg( $mimes ){
+  $mimes['svg'] = 'image/svg+xml';
+  return $mimes;
+}
+add_filter( 'upload_mimes', 'ux_enable_svg' );
