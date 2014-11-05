@@ -1,9 +1,4 @@
 jQuery(document).ready(function(jQuery) {
-	// Initiate our response function list variable.
-	window['ninja_forms_response_function_list'] = {};
-
-	// Initiate our beforeSubmit function list variable.
-	window['ninja_forms_before_submit_function_list'] = {};
 
 	// Prevent the enter key from submitting the form.
 	jQuery(".ninja-forms-form input").bind("keypress", function(e) {
@@ -718,20 +713,6 @@ function ninja_forms_response(responseText, statusText, xhr, jQueryform){
 	}
 }
 
-function ninja_forms_register_response_function(form_id, name){
-	if( typeof window['ninja_forms_response_function_list'][form_id] == 'undefined' ){
-		window['ninja_forms_response_function_list'][form_id] = {};
-	}
-	window['ninja_forms_response_function_list'][form_id][name] = name;
-}
-
-function ninja_forms_register_before_submit_function(form_id, name){
-	if( typeof window['ninja_forms_before_submit_function_list'][form_id] == 'undefined' ){
-		window['ninja_forms_before_submit_function_list'][form_id] = {};
-	}
-	window['ninja_forms_before_submit_function_list'][form_id][name] = name;
-}
-
 function ninja_forms_default_before_submit(formData, jqForm, options){
 	var form_id = jQuery(jqForm).prop("id").replace("ninja_forms_form_", "" );
 
@@ -749,10 +730,13 @@ function ninja_forms_default_before_submit(formData, jqForm, options){
 function ninja_forms_default_response(response){
 	var form_id = response.form_id;
 
-	//jQuery("#ninja_forms_form_" + form_id + "_process_msg").hide();
+	ninja_forms_update_error_msgs(response);
+	ninja_forms_update_success_msg(response);
 
-	ninja_forms_update_error_msgs(response)
-	ninja_forms_update_success_msg(response)
+	if ( response.errors == false && typeof response.form_settings['landing_page'] != 'undefined' && response.form_settings['landing_page'] != '' ) {
+		window.location = response.form_settings['landing_page'];
+	}
+
 	return true;
 }
 

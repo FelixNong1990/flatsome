@@ -261,14 +261,24 @@ function nf_get_object_meta_value( $object_id, $meta_key ) {
  * @return array $children
  */
 
-function nf_get_object_children( $object_id, $child_type = '', $full_data = true ) {
+function nf_get_object_children( $object_id, $child_type = '', $full_data = true, $include_forms = true ) {
 	global $wpdb;
 
-	if ( $child_type != '' ) {
-		$children = $wpdb->get_results( $wpdb->prepare( "SELECT child_id FROM " . NF_OBJECT_RELATIONSHIPS_TABLE_NAME . " WHERE child_type = %s AND parent_id = %d", $child_type, $object_id ), ARRAY_A);
+
+	if ( $include_forms ) {
+		if ( $child_type != '' ) {
+			$children = $wpdb->get_results( $wpdb->prepare( "SELECT child_id FROM " . NF_OBJECT_RELATIONSHIPS_TABLE_NAME . " WHERE child_type = %s AND parent_id = %d", $child_type, $object_id ), ARRAY_A);
+		} else {
+			$children = $wpdb->get_results( $wpdb->prepare( "SELECT child_id FROM " . NF_OBJECT_RELATIONSHIPS_TABLE_NAME . " WHERE parent_id = %d", $object_id ), ARRAY_A);
+		}
 	} else {
-		$children = $wpdb->get_results( $wpdb->prepare( "SELECT child_id FROM " . NF_OBJECT_RELATIONSHIPS_TABLE_NAME . " WHERE parent_id = %d", $object_id ), ARRAY_A);
+		if ( $child_type != '' ) {
+			$children = $wpdb->get_results( $wpdb->prepare( "SELECT child_id FROM " . NF_OBJECT_RELATIONSHIPS_TABLE_NAME . " WHERE child_type = %s AND parent_id = %d AND parent_type <> 'form'", $child_type, $object_id ), ARRAY_A);
+		} else {
+			$children = $wpdb->get_results( $wpdb->prepare( "SELECT child_id FROM " . NF_OBJECT_RELATIONSHIPS_TABLE_NAME . " WHERE parent_id = %d AND parent_type <> 'form'", $object_id ), ARRAY_A);
+		}
 	}
+
 	$tmp_array = array();
 	if ( $full_data ) {
 		foreach( $children as $id ) {
@@ -379,6 +389,13 @@ function nf_insert_object( $type ) {
 function nf_delete_object( $object_id ) {
 	global $wpdb;
 
+	// Check to see if we have any object children.
+	$children = nf_get_object_children( $object_id, '', false, false );
+
+	foreach ( $children as $child_id ) {
+		nf_delete_object( $child_id );
+	}
+
 	// Delete this object.
 	$wpdb->query( $wpdb->prepare( 'DELETE FROM ' . NF_OBJECTS_TABLE_NAME .' WHERE id = %d', $object_id ) );
 
@@ -390,6 +407,7 @@ function nf_delete_object( $object_id ) {
 
 	return true;
 }
+
 
 /**
  * Create a relationship between two objects
@@ -424,6 +442,21 @@ function nf_get_object_parent( $child_id ) {
 	// Check our relationship table for where this ID appears as a child.
 	$parent = $wpdb->get_row( $wpdb->prepare( 'SELECT parent_id FROM ' . NF_OBJECT_RELATIONSHIPS_TABLE_NAME . ' WHERE child_id = %d', $child_id ), ARRAY_A );
 	return $parent['parent_id'];
+}
+
+/**
+ * Get an object's type
+ * 
+ * @since 2.8.6
+ * @param $object_id
+ * @return string $type
+ */
+
+function nf_get_object_type( $object_id ) {
+	global $wpdb;
+	// Get our object type
+	$type = $wpdb->get_row( $wpdb->prepare( 'SELECT type FROM ' . NF_OBJECTS_TABLE_NAME . ' WHERE id = %d', $object_id ), ARRAY_A );
+	return $type['type'];
 }
 
 /**
@@ -483,3 +516,18 @@ function nf_get_objects_by_type( $object_type ) {
 
 	return $results;
 }
+
+/**
+ * Add filters so that users given the ability to see the "All Forms" table and the add new form page
+ * can add new fields and delete forms.
+ * 
+ * @since 2.8.6
+ * @return void
+ */
+function nf_add_permissions_filters( $cap ) {
+	return apply_filters( 'ninja_forms_admin_all_forms_capabilities', $cap );
+}
+
+add_filter( 'nf_new_field_capabilities', 'nf_add_permissions_filters' );
+add_filter( 'nf_delete_field_capabilities', 'nf_add_permissions_filters' );
+add_filter( 'nf_delete_form_capabilities', 'nf_add_permissions_filters' );
