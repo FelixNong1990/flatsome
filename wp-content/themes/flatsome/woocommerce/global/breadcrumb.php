@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-global $post, $wp_query;
+global $post, $wp_query, $flatsome_opt;
 
 $prepend      = '';
 $permalinks   = get_option( 'woocommerce_permalinks' );
@@ -27,8 +27,12 @@ if ( ( ! is_home() && ! is_front_page() && ! ( is_post_type_archive() && get_opt
 
 	echo $wrap_before;
 
-	if ( ! empty( $home ) ) {
-		echo $before . '<a class="home" href="' . apply_filters( 'woocommerce_breadcrumb_home_url', home_url() ) . '">' . $home . '</a>' . $after . $delimiter;
+	if(!isset($flatsome_opt['breadcrumb_home']) || $flatsome_opt['breadcrumb_home']){ 
+		if ( ! empty( $home ) ) {
+			echo $before . '<a class="home" href="' . apply_filters( 'woocommerce_breadcrumb_home_url', home_url() ) . '">';
+			_e('Home', 'flatsome');
+			echo  '</a>' . $after . $delimiter;
+		} 
 	}
 
 	if ( is_category() ) {

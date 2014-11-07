@@ -75,8 +75,8 @@ function ux_block_scripts() {
         if (window.frameElement) {
           $('html').addClass('blocks-iframe');
         }
-    		var preview_url = $('input[value="preview_url"]').parent().parent().find('textarea').val();
-    		var preview_title = $('input[value="preview_title"]').parent().parent().find('textarea').val();
+		var preview_url = $('input[value="preview_url"]').parent().parent().find('textarea').val();
+		var preview_title = $('input[value="preview_title"]').parent().parent().find('textarea').val();
         var block_id = $('input#post_name').val();
         $('#submitdiv').after('<div class="postbox"><div class="inside"><p>Shortcode:<br> <b>[block id="'+block_id+'"]</b></p></div></div>');
     		if(preview_url){
@@ -112,63 +112,44 @@ function ux_block_frontend() {
 add_action( 'wp_footer', 'ux_block_frontend');
 
 
-/* ADD SHORTCODE */
-// [block id=""]
-function block_shortcode($atts, $content = null) {	
-	 extract( shortcode_atts( array(
-    	'id' => ''
-  	 ), $atts ) );
-	// get content by slug
-	global $wpdb,$post;;
-	$post_id = $wpdb->get_var("SELECT ID FROM $wpdb->posts WHERE post_name = '$id'");
-	if($post_id){
-		$html =	get_post_field('post_content', $post_id);
+function block_shortcode($atts, $content = null) {  
+     extract( shortcode_atts( array(
+        'id' => ''
+     ), $atts ) );
+    // get content by slug
+    global $wpdb,$post;
+    $post_id = $wpdb->get_var("SELECT ID FROM $wpdb->posts WHERE post_name = '$id'");
+    $permalink =  get_permalink($post_id);
+   /* if(isset($_GET['block_editor'])){
+        if($post_id){
+         $html = '<iframe src="'.$permalink.'?edit_block" style="border:0;width:100%;height:200px;"></iframe>';
+        } else{
+            $html = '<p><mark>UX Block <b>"'.$id.'"</b> not found! Wrong ID?</mark></p>';   
+        }
+    } else{ */
+        if($post_id){
+        $html = get_post_field('post_content', $post_id);
 
-		// add edit link for admins
-		if (current_user_can('edit_posts')) {
-		   $edit_link = get_edit_post_link( $post_id ); 
-	 	   $html = '<div id="block-'.$id.'" class="ux_block"><a class="edit-link" href="'.$edit_link.'&preview_url='.$post->ID.'">Edit Block</a>'.$html.'</div>';
-		}
+        // add edit link for admins
+        if (current_user_can('edit_posts')) {
+           $edit_link = get_edit_post_link( $post_id ); 
+           $html = '<div id="block-'.$id.'" class="ux_block"><a class="edit-link" href="'.$edit_link.'&preview_url='.$post->ID.'">Edit Block</a>'.$html.'</div>';
+        }
 
-		$html = do_shortcode( $html );
+        $html = do_shortcode( $html );
 
-	} else{
-		
-		$html = '<p><mark>UX Block <b>"'.$id.'"</b> not found! Wrong ID?</mark></p>';	
-	
-	}
+        } else{
+            
+            $html = '<p><mark>UX Block <b>"'.$id.'"</b> not found! Wrong ID?</mark></p>';   
+        
+        }
+   
+   
 
-	return $html;
+    return $html;
 }
 add_shortcode('block', 'block_shortcode');
 
-
-// VISUAL COMPOSER ADDON
-if (class_exists('WPBakeryVisualComposerAbstract')) {
-
-
-vc_map(array(
-   "name"     => "Block",
-   "category"   => 'Content',
-   "description"  => "Show a block",
-   "base"     => "block",
-   "weight" => 1,
-   "class"      => "",
-   "icon"     => "ux_blocks",   
-   "params"   => array(
-    array(
-      "type" => "list_blocks",
-      "class" => "",
-      "holder" => "h3",
-      "heading" => "Select Block:",
-      "param_name" => "id",
-      "value" =>  ""
-    )
-   )
-));
-
-
-}// end visual composer stuff
 
 /* ADD CATEGOIRES SUPPORT */
 if ( ! function_exists( 'blocks_categories' ) ) {

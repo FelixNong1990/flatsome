@@ -233,7 +233,7 @@
                             text: 'Blog Posts',
                             menu: [
                                 {
-                                    text: 'Blog Post Slider Centered',
+                                    text: 'Blog Post Slider',
                                     value: '[blog_posts posts="6" columns="3" image_height="200px" show_date="true"]',
                                     onclick: function(e) {
                                         e.stopPropagation();
@@ -241,8 +241,16 @@
                                     }       
                                 },
                                  {
-                                    text: 'Blog Post Slider Horizontal',
-                                    value: '[blog_posts columns="2" style="horizontal" posts="8" category="" image_height="150px" show_date="true"]',
+                                    text: 'Blog Post Slider - Text overlay',
+                                    value: '[blog_posts columns="3" style="text-overlay" posts="8" category="" image_height="150px" show_date="true"]',
+                                    onclick: function(e) {
+                                        e.stopPropagation();
+                                        editor.insertContent(this.value());
+                                    }       
+                                },
+                                 {
+                                    text: 'Blog Post Slider - Text Bounce',
+                                    value: '[blog_posts columns="3" style="text-bounce" posts="8" category="" image_height="150px" show_date="true"]',
                                     onclick: function(e) {
                                         e.stopPropagation();
                                         editor.insertContent(this.value());
@@ -387,7 +395,7 @@
 
                         {
                             text: 'Price Table',
-                            value: '[ux_price_table title="Awesome title" featured="false" description="This is a description" button_text="Order Now" button_link="#"]<br>[bullet_item text="This is a bullet item"]<br>[bullet_item text="This is a bullet item"]<br>[bullet_item text="This is a bullet item"]<br>[/ux_price_table]',
+                            value: '[ux_price_table price="99$" title="Awesome title" featured="false" description="This is a description" button_text="Order Now" button_link="#"]<br>[bullet_item text="This is a bullet item"]<br>[bullet_item text="This is a bullet item"]<br>[bullet_item text="This is a bullet item"]<br>[/ux_price_table]',
                             onclick: function(e) {
                                 e.stopPropagation();
                                 editor.insertContent(this.value());
@@ -395,7 +403,7 @@
                         },
                         {
                             text: 'Testemonial',
-                            value: '[testimonial image="http://imageurl" name="Author name" company="Company name" stars="5"]<br> Add testemonial text here <br>[/testimonial]',
+                            value: '[testimonial style="" image="http://imageurl" name="Author name" company="Company name" stars="5"]<br> Add testemonial text here <br>[/testimonial]',
                             onclick: function(e) {
                                 e.stopPropagation();
                                 editor.insertContent(this.value());

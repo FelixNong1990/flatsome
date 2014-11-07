@@ -333,12 +333,12 @@ if(!class_exists('WC_Product_Data_Fields')){
 
           /** field name in pairs array **/
           $data_args = array();
+
+
           foreach(wc_custom_product_data_fields() as $data){
-
-            $name = $data['id'];
-
-            $data_args[$data['id']] = stripslashes($_POST[$data['id']]);
-
+            if(isset($data['id'])){
+              $data_args[$data['id']] = stripslashes($_POST[$data['id']]);
+            }
           }
 
 					$options_value[] = $data_args;

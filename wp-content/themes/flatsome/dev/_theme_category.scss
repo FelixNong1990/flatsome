@@ -107,7 +107,7 @@ backface-visibility:hidden;
 .add-to-cart-grid{position: absolute;bottom:-30px; @include single-transition(all,350ms); left:10px;display: block;top:auto;right:auto;padding:0;margin: 0;}
 .product-image:hover .add-to-cart-grid{bottom:35px;}
 .product-image .added_to_cart{display:none!important;}
-.product-image .cart-icon strong{padding: 0px 2px; font-size: 10px; margin: 0; line-height: 14px;}
+.product-image .cart-icon strong{padding: 1px 3px 0px; font-size: 8px; margin: 0; line-height: 14px;}
 .product-image .cart-icon .cart-icon-handle{top: -6px; height: 6px; width: 10px; right: 50%; margin-right: -5px;}
 .add-to-cart-grid .cart-icon strong:hover{color:#FFF;}
 

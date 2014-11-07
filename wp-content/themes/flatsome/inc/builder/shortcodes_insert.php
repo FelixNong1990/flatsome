@@ -36,7 +36,6 @@ $default_elements ='
       <li><a href="#" class="ux-add-div">2 / 4<textarea>[col span="2/4"] [/col]</textarea></a></li>
       <li><a href="#" class="ux-add-div">3 / 4<textarea>[col span="3/4"] [/col]</textarea></a></li>
       <li><a href="#" class="ux-add-div">Divider<textarea>[col span="1/1"][divider][/col]</textarea></a></li>
-
 </ul>
 </div><!-- columns in row -->
 
@@ -122,7 +121,14 @@ $default_elements ='
             <li><a href="#" class="ux-add-div"><img src="<?php echo $builder_url.'img/shortcodes/section_parallax.jpg'; ?>"/><textarea>[section bg="http://imageurl"  dark="true" padding="60px" parallax_text="0" parallax="3" margin="0px"] [/section]</textarea></a></li>
             <li><a href="#" class="ux-add-div"><img src="<?php echo $builder_url.'img/shortcodes/section_text_parallax.jpg'; ?>"/><textarea>[section bg="http://imageurl"  dark="true" padding="60px" parallax_text="3" parallax="1" margin="0px"] [/section]</textarea></a></li>
             <li><a href="#" class="ux-add-div"><img src="<?php echo $builder_url.'img/shortcodes/section_video.jpg'; ?>"/><textarea>[section dark="true" video_mp4="http:/videourl" video_ogv="http://videourl" video_webm="http://videourl" padding="30px" margin="0px"] [/section]</textarea></a></li>
+            <li><a href="#" class="ux-add-div"><img src="<?php echo $builder_url.'img/shortcodes/section_image_right.png'; ?>"/><textarea>[section dark="true" bg="#000" img="http://imageurl" img_pos="right" img_width="50%" img_margin="0" padding="60px" margin="0px"] [row] [col span="1/2"] Add content here [/col] [col span="1/2"]  [/col] [/row] [/section]</textarea></a></li>
+            <li><a href="#" class="ux-add-div"><img src="<?php echo $builder_url.'img/shortcodes/section_image_left.png'; ?>"/><textarea>[section dark="true" bg="#000" img="http://imageurl" img_pos="left" img_width="50%" img_margin="0" padding="60px" margin="0px"] [row] [col span="1/2"]  [/col] [col span="1/2"] Add content here [/col] [/row] [/section]</textarea></a></li>
+            <li><a href="#" class="ux-add-div"><img src="<?php echo $builder_url.'img/shortcodes/section_image_top.png'; ?>"/><textarea>[section dark="true" bg="#000" img="http://imageurl" img_pos="top" img_width="100%" img_margin="0" padding="60px" margin="0px"] [row] [col span="1/1"] Add content here [/col] [/row] [/section]</textarea></a></li>
+            <li><a href="#" class="ux-add-div"><img src="<?php echo $builder_url.'img/shortcodes/section_image_bottom.png'; ?>"/><textarea>[section dark="true" bg="#000" img="http://imageurl" img_pos="bottom" img_width="100%" img_margin="0" padding="60px" margin="0px"] [row] [col span="1/1"] Add content here [/col]  [/row] [/section]</textarea></a></li>
         </ul>
+           <div class="lightbox-tools bottom">
+                    <a href="#" class="close-lightbox button media-button button-secondary button-large">Cancel</a>
+            </div>
       </div>
 </div>
 
@@ -138,6 +144,9 @@ $default_elements ='
             <li><a href="#" class="ux-add-div" data-shortcode="row"><img src="<?php echo $builder_url.'img/shortcodes/col_1_4_2_4_1_4.jpg'; ?>"/><span>1/4 | 2/4 | 1/4</span><textarea>[row] [col span="1/4"]  [/col] [col span="2/4"]  [/col][col span="1/4"]  [/col] [/row]</textarea></a></li>
             <li><a href="#" class="ux-add-div" data-shortcode="row"><img src="<?php echo $builder_url.'img/shortcodes/col_1_4_3_4.jpg'; ?>"/><span>1/4 | 3/4</span><textarea>[row] [col span="1/4"] [/col][col span="3/4"] [/row]</textarea></a></li>
         </ul>
+             <div class="lightbox-tools bottom">
+                    <a href="#" class="close-lightbox button media-button button-secondary button-large">Cancel</a>
+            </div>
       </div>
 </div>
 
@@ -163,12 +172,15 @@ $default_elements ='
              <li><a href="#" class="ux-add-div" data-shortcode="featured_box"><img src="<?php echo $builder_url.'img/shortcodes/element_featured_box.jpg'; ?>"/><span>Featured Box</span><textarea>[featured_box title="Title text" img="http://iconurl" img_width="" pos="center" link=""]Featured box text[/featured_box]</textarea></a></li>
              <li><a href="#" class="ux-add-div" data-shortcode="featured_items"><img src="<?php echo $builder_url.'img/shortcodes/element_featured_items.jpg'; ?>"/><span>Featured Items</span><textarea>[featured_items_slider style="1" items="8" cat="" height="250px"][featured_items_grid style="1" items="8" cat="" height="250px"]</textarea></a></li>
              <li><a href="#" class="ux-add-div" data-shortcode="tabs"><img src="<?php echo $builder_url.'img/shortcodes/element_price_table.jpg'; ?>"/><span>Price Table</span><textarea>[ux_price_table title="Enter title here.." price="99$" description="Enter description here..." button_style="primary" button_link="http://link"][bullet_item text="Enter text here.."][bullet_item text="Enter text here.."][bullet_item text="Enter text here.."][/ux_price_table]</textarea></a></li>
-             <li><a href="#" class="ux-add-div" data-shortcode="scroll_to"><img src="<?php echo $builder_url.'img/shortcodes/element_scroll_to.jpg'; ?>"/><span>Scroll To</span><textarea>[scroll_to id="unique_id" title="Enter a title"]</textarea></a></li>
+             <li><a href="#" class="ux-add-div" data-shortcode="scroll_to"><img src="<?php echo $builder_url.'img/shortcodes/element_scroll_to.jpg'; ?>"/><span>Scroll To</span><textarea>[scroll_to link="#unique_id" title="Enter a title"]</textarea></a></li>
              <li><a href="#" class="ux-add-div" data-shortcode="search"><img src="<?php echo $builder_url.'img/shortcodes/element_search_box.jpg'; ?>"/><span>Search Box</span><textarea>[search]</textarea></a></li>
              <li><a href="#" class="ux-add-div" data-shortcode="form"><img src="<?php echo $builder_url.'img/shortcodes/element_form.jpg'; ?>"/><span>Ninja Form</span><textarea>[ninja_forms_display_form id="1"]</textarea></a></li>
              <li><a href="#" class="ux-add-div" data-shortcode="lightbox"><img src="<?php echo $builder_url.'img/shortcodes/element_lightbox.jpg'; ?>"/><span>Lightbox</span><textarea>  <a href="#lightbox"> Lightbox link </a> [button text="Lightbox button" link="#lightbox"] [lightbox id="lightbox" width="600px" padding="20px"] Add lightbox content here... [/lightbox]</textarea></a></li>
              <li><a href="#" class="ux-add-div" data-shortcode="logo"><img src="<?php echo $builder_url.'img/shortcodes/element_logo.jpg'; ?>"/><span>Logo</span><textarea>[logo img="imageurl" padding="10px" height="50px"]</textarea></a></li>
          </ul>
+            <div class="lightbox-tools bottom">
+                    <a href="#" class="close-lightbox button media-button button-secondary button-large">Cancel</a>
+            </div>
       </div>
 </div>
 
@@ -199,6 +211,9 @@ $default_elements ='
              <li><a href="#" class="ux-add-div">Page: Order Tracking<textarea>[woocommerce_order_tracking]</textarea></a></li>
 
          </ul>
+            <div class="lightbox-tools bottom">
+                    <a href="#" class="close-lightbox button media-button button-secondary button-large">Cancel</a>
+            </div>
       </div>
 </div>
 
@@ -224,6 +239,9 @@ $default_elements ='
             <li><a href="#" class="ux-add-div"><img src="<?php echo $builder_url.'img/shortcodes/banner_12.jpg'; ?>"/><textarea>[ux_banner height="400px" text_color="light" animated="fadeIn" text_width="66%" text_align="center" text_pos="center" parallax="0" parallax_text="0" ] <h1 class="text-boarder-top-bottom-white">NEW ARRIVALS</h1> <a class="button alt-button white" href="http://#">SHOP NOW</a>[/ux_banner]</textarea></a></li>
 
             </ul>
+               <div class="lightbox-tools bottom">
+                    <a href="#" class="close-lightbox button media-button button-secondary button-large">Cancel</a>
+            </div>
  
       </div>
 </div>

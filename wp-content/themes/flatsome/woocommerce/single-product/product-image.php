@@ -89,17 +89,20 @@ $attachment_ids = $product->get_gallery_attachment_ids();
       			  /* Fix slider on resize */
 			     function resizeProductSlider(args){ 
 			        setTimeout(function() {
-				      var slide_height = $(args.currentSlideObject).outerHeight();
-      				 $(args.sliderContainerObject).css('min-height',slide_height);
-      				 $(args.sliderContainerObject).css('height','auto');
+				      var slide_height = $(args.currentSlideObject).find('img').outerHeight();
+	      				 $(args.sliderContainerObject).css('min-height',slide_height);
+	      				 $(args.sliderContainerObject).css('height','auto');
+	      				 $(args.currentSlideObject).css('height',slide_height);
 			        }, 50);
 			     }
 
 			     /* update thubnails */
 			     function slideChange(args) {
-			         var slide_height = $(args.currentSlideObject).outerHeight();
+			         var slide_height = $(args.currentSlideObject).find('img').outerHeight();
       				 $(args.sliderContainerObject).css('min-height',slide_height);
       				 $(args.sliderContainerObject).css('height','auto');
+      				 $(args.currentSlideObject).css('height',slide_height);
+
 			         $('.product-thumbnails .thumb').removeClass('selected');
 			         $('.product-thumbnails .thumb:eq(' + (args.currentSlideNumber - 1) + ')').addClass('selected');
 			         var slider_count = $('.iosSlider.product-thumbnails').find('.thumb').length;

@@ -292,7 +292,7 @@ $('.ux_banner .inner-wrap.animated').waypoint(function() {
      $(this).addClass(animation);
      $(this).addClass('start-anim');
   }
-},{ offset: '80%' });
+},{ offset: '95%' });
 
 /* show Back to top links */
 $('#main-content').waypoint(function() {
@@ -306,7 +306,7 @@ setTimeout(function() {
       $(this).addClass('animated');
       $(this).addClass($(this).data('animate')); 
       }
-  },{offset: '90%'});
+  },{offset: '95%'});
 }, 100);
 
 /* Add sticky header */
@@ -464,7 +464,6 @@ $('textarea#comment').blur(function(){
 });
 
 /****** Layout fixes *********/
-
 $( window ).resize(function() {
   $('.ux_banner.full-height').height($( window ).height());
 });
@@ -484,7 +483,7 @@ $('.slider .add_to_cart_button').hover(
 );
 
 
-// Set height on full height banners
+// add to cart in grid
 $('.add-to-cart-grid.product_type_simple').click(function(){
   jQuery('.mini-cart').addClass('active cart-active');
   jQuery('.mini-cart').hover(function(){jQuery('.cart-active').removeClass('cart-active');});
@@ -494,7 +493,7 @@ $('.add-to-cart-grid.product_type_simple').click(function(){
 
 //  hacks
 $('.ux_banner [class^="text-box-"], .ux_banner [class^="text-border"]').after('<div class="clearfix"/>');
-$('.ux_banner .inner-wrap p > br, .accordion > br').remove();
+$('.ux_banner .inner-wrap p > br, .accordion > br, #content > br, .ux-section-content > br, .social-icons > br').remove();
 
 // Meage menu fix
 $('#megaMenu').wrap('<li/>');

@@ -29,10 +29,11 @@ function uxbannerShortcode( $atts, $content = null ){
     'parallax' => '',
     'parallax_text' => '',
     'text_bg' => '',
-    'text_bg_opacity' => '0.5',
+    'text_bg_opacity' => '0.9',
     'padding' => '30px',
     'target' => '',
     'bg_overlay' => '',
+    'class' => '',
   ), $atts ) );
 
   ob_start();
@@ -71,13 +72,6 @@ function uxbannerShortcode( $atts, $content = null ){
    if($text_align) {$textalign = "text-".$text_align;}
 
    $parallax_velocity = '0.'.$parallax;
-   if($effect)
-
-   /* set rgba background */
-   if (strpos($text_bg,'#') !== false) {
-       if($text_bg){$text_bg = ux_hex2rgba($text_bg,$text_bg_opacity); };
-   }
-
     
    $parallax_class = '';
    if($parallax){$parallax_class = ' ux_parallax'; $parallax='data-velocity="0.'.$parallax.'"';} 
@@ -87,7 +81,7 @@ function uxbannerShortcode( $atts, $content = null ){
   
 
   ?>
-   <div id="banner_<?php echo $bannerid; ?>" class="ux_banner <?php echo $color; ?> <?php if($height == '100%') echo 'full-height'; ?> <?php echo $hover; ?> <?php if(!$bg && !$bg_color){ ?>bg-trans<?php } ?>"  style="height:<?php echo $height; ?>; <?php echo $bg_color; ?>" data-height="<?php echo $height; ?>" role="banner">
+   <div id="banner_<?php echo $bannerid; ?>" class="ux_banner <?php echo $color; ?> <?php echo $class; ?> <?php if($height == '100%') echo 'full-height'; ?> <?php echo $hover; ?> <?php if(!$bg && !$bg_color){ ?>bg-trans<?php } ?>"  style="height:<?php echo $height; ?>; <?php echo $bg_color; ?>" data-height="<?php echo $height; ?>" role="banner">
       <?php echo $start_link; ?>
         <?php if($youtube) { ?>
           <div id="ytplayer" class="ux-youtube <?php echo $parallax_class; ?>"></div>
@@ -110,7 +104,7 @@ function uxbannerShortcode( $atts, $content = null ){
         <div class="row<?php if($parallax_text) echo ' parallax_text'; ?><?php echo $text_parallax_class; ?>" <?php if($parallax_text) echo $parallax_text; ?>>
           <div class="inner <?php echo $text_pos; ?> <?php echo $textalign; ?> <?php if($text_bg){echo 'text-boxed';} ?>
 "  style="width:<?php echo $text_width; ?>;">
-            <div class="inner-wrap <?php echo $animated; ?>" data-animate="<?php echo $animation; ?>" style="<?php if($text_bg){echo 'background-color:'.$text_bg.';';} ?> <?php if($text_bg){echo 'padding:'.$padding;} ?>">
+            <div class="inner-wrap <?php echo $animated; ?>" data-animate="<?php echo $animation; ?>" style="<?php if($text_bg){echo 'background-color:'.ux_hex2rgba($text_bg,$text_bg_opacity).';';} ?> <?php if($text_bg){echo 'padding:'.$padding;} ?>">
               <?php echo fixShortcode($content); ?>
             </div>
           </div>  

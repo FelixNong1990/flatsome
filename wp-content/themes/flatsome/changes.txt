@@ -1,3 +1,24 @@
+--- 2.0.5 ---
+NEW: Added parallax effect to columns.
+NEW: Added image to UX Sections (top, left, bottom, right).
+NEW: Added class="" to [section], [row] and [col]
+
+FIX: Javascript errors with some plugins.
+FIX: Compability with WooCommerce Bulk Variations plugin.
+FIX: Social icons was hidden on dark header.
+FIX: Background position on UX Banners.
+
+--- 2.0.1 ---
+NEW: Custom CSS block is now minified.
+NEW: align="" added to [col]. Align text and elements inside columns.
+NEW: Set max number of related products.
+
+FIX: Various CSS bugs reported by users.
+FIX: Various CSS improvements.
+FIX: Product image slider on Android.
+FIX: Flatsome Builder improvements.
+
+
 --- 2.0 ---
 NEW: Flatsome Page Builder added (BETA)
 NEW: Enable minified CSS and JavaScript in Theme Options for better speed. 
@@ -8,7 +29,6 @@ NEW: [logo] shortcode.
 NEW: Youtube and vimeo button links opens default in Lightbox.
 NEW: UX Banner grid has now pre-defined layouts you can choose from.
 NEW: New grid styles added to Category Grid shortcode.
-NEW: Custom heading shortcode. Add any Google Font as custom heading.
 NEW: New transparent page template with light text and light logo.
 NEW: Phone shortcode and Header button shortcode to use in header.
 NEW: New styles added to Team Member shortcode.
@@ -21,28 +41,28 @@ NEW: Footer Content field to Categories.
 NEW: Add Custom product tab for each product.
 NEW: New page template - Full Width - Parallax Title.
 
-NEW OPTION: Right main menu menu option.
+NEW OPTION: Right main menu option.
 NEW OPTION: Related products can now be a grid / slider or disabled.
 NEW OPTION: Added VKontakte to share icons.
-NEW OPTION: Added custom width to rows. (width="")
+NEW OPTION: Added custom width to rows. (width="").
 NEW OPTION: Button styles added to Formats drop down in WP Editor.
 NEW OPTION: Set custom column widths for mobile view.
 NEW OPTION: Set custom mobile and tablet height for UX Banners.
 NEW OPTION: LinkedIn and Instagram added to Team Member shortcode.
 NEW OPTION: Added align="center" to [divider] shortcode.
 NEW OPTION: Tooltip added to Price table bullets.
-NEW OPTION: Overlay on UX Banners. Add a color overlay for better text visibility.
-NEW OPTION: Hide excerpts from Blog post shortcode
+NEW OPTION: Color Overlay on UX Banners.
+NEW OPTION: Hide excerpts from Blog post shortcode.
 
 FIXED: Better Accordion usability for mobiles.
-FIXED: Ajax Layered Navigation now works correctly
-FIXED: YITH WooCommerce Ajax Navigation now works correctly
+FIXED: Ajax Layered Navigation now works correctly.
+FIXED: YITH WooCommerce Ajax Navigation now works correctly.
 FIXED: Quick view visible on iPad portrait and iPad landscape.
 FIXED: Featured Price table now works.
 FIXED: Image placeholder for products without image.
 FIXED: Category grid featured image bug.
 FIXED: Slider bullets unclickable in Firefox.
-FIXED: Various minor bugs
+FIXED: Various minor bugs.
 FIXED: Error messages now works correctly.
 
 

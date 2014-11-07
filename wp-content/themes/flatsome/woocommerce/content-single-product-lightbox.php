@@ -2,6 +2,8 @@
 	global $post, $product, $woocommerce;
 	$attachment_ids = $product->get_gallery_attachment_ids();
 
+	// run quick view hooks
+	do_action('wc_quick_view_before_single_product');
 ?> 
            
 <div class="row collapse">

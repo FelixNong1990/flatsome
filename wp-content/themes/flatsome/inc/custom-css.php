@@ -1,6 +1,7 @@
 <?php
 function flatsome_custom_css() {
 global $flatsome_opt;
+ob_start();
 ?>
 
 <!-- Custom CSS Codes -->
@@ -20,8 +21,13 @@ global $flatsome_opt;
 	<?php }?>
 
 	<?php if($flatsome_opt['header_height']){ ?> 
-			#masthead{ height:<?php echo $flatsome_opt['header_height']; ?>px; }
-		   	#logo a img{ max-height:<?php $height = $flatsome_opt['header_height'];  $height = str_replace("px","", $height);  $height = ($height)-50; $height = $height.'px'; echo $height;?>}
+			#masthead{ height:<?php echo $flatsome_opt['header_height']; ?>px;}
+			<?php if($flatsome_opt['header_height'] > '70'){ ?>
+				#logo a img{ max-height:<?php $height = $flatsome_opt['header_height'];  $height = str_replace("px","", $height);  $height = ($height)-50; $height = $height.'px'; echo $height;?>}
+			<?php } else { ?>
+				#logo a img{ max-height:<?php $height = $flatsome_opt['header_height'];  $height = str_replace("px","", $height);  $height = ($height)-10; $height = $height.'px'; echo $height;?>}
+				#masthead #logo a{margin-top: 0;padding: 5px 0;} #masthead .left-links > ul, #masthead .right-links > ul {padding-top: 0} 
+			<?php } ?>
 	<?php } ?>
 
 	<?php if($flatsome_opt['logo_width']){ ?> 
@@ -38,7 +44,11 @@ global $flatsome_opt;
 	<?php if($flatsome_opt['header_height_sticky']){ ?> 
 			#masthead.stuck.move_down{height:<?php  echo $flatsome_opt['header_height_sticky']; ?>px;}
 			.wide-nav.move_down{top:<?php  echo $flatsome_opt['header_height_sticky']; ?>px;}
-			#masthead.stuck.move_down #logo a img{ max-height:<?php $height = $flatsome_opt['header_height_sticky'];  $height = str_replace("px","", $height);  $height = ($height)-30; $height = $height.'px'; echo $height;?> }
+			<?php if($flatsome_opt['header_height_sticky'] > '70'){ ?>
+				#masthead.stuck.move_down #logo a img{ max-height:<?php $height = $flatsome_opt['header_height_sticky'];  $height = str_replace("px","", $height);  $height = ($height)-30; $height = $height.'px'; echo $height;?> }
+			<?php } else { ?>
+				#masthead.stuck.move_down #logo a img{ max-height:<?php $height = $flatsome_opt['header_height_sticky'];  $height = str_replace("px","", $height);  $height = ($height)-10; $height = $height.'px'; echo $height;?> }
+			<?php } ?>
 	<?php } ?>
 
 	/* header size */
@@ -80,7 +90,7 @@ global $flatsome_opt;
 		/* -- color -- */
 		.alt-button.primary,.callout.style3 .inner .inner-text,.add-to-cart-grid .cart-icon strong,.tagcloud a,.navigation-paging a, .navigation-image a ,ul.page-numbers a, ul.page-numbers li > span,#masthead .mobile-menu a,.alt-button, #logo a, li.mini-cart .cart-icon strong,.widget_product_tag_cloud a, .widget_tag_cloud a,.post-date,#masthead .mobile-menu a.mobile-menu a,.checkout-group h3,.order-review h3 {color: <?php echo $flatsome_opt['color_primary'] ?>;}
 		/* -- background -- */
-		.ux-box.ux-text-overlay .ux-box-image,.ux-header-element a:hover,.featured-table.ux_price_table .title,.scroll-to-bullets a strong,.scroll-to-bullets a.active,.scroll-to-bullets a:hover,.tabbed-content.pos_pills ul.tabs li.active a,.ux_hotspot,ul.page-numbers li > span,.label-new.menu-item a:after,.add-to-cart-grid .cart-icon strong:hover,.text-box-primary, .navigation-paging a:hover, .navigation-image a:hover ,.next-prev-nav .prod-dropdown > a:hover,ul.page-numbers a:hover,.widget_product_tag_cloud a:hover,.widget_tag_cloud a:hover,.custom-cart-count,.iosSlider .sliderNav a:hover span,.loading i, li.mini-cart.active .cart-icon strong,.product-image .quick-view, .product-image .product-bg, #submit, button, #submit, button, .button, input[type="submit"],li.mini-cart.active .cart-icon strong,.post-item:hover .post-date,.blog_shortcode_item:hover .post-date,.column-slider .sliderNav a:hover,.ux_banner {background-color: <?php echo $flatsome_opt['color_primary'] ?>}
+		.ux-box.ux-text-badge:hover .ux-box-text, .ux-box.ux-text-overlay .ux-box-image,.ux-header-element a:hover,.featured-table.ux_price_table .title,.scroll-to-bullets a strong,.scroll-to-bullets a.active,.scroll-to-bullets a:hover,.tabbed-content.pos_pills ul.tabs li.active a,.ux_hotspot,ul.page-numbers li > span,.label-new.menu-item a:after,.add-to-cart-grid .cart-icon strong:hover,.text-box-primary, .navigation-paging a:hover, .navigation-image a:hover ,.next-prev-nav .prod-dropdown > a:hover,ul.page-numbers a:hover,.widget_product_tag_cloud a:hover,.widget_tag_cloud a:hover,.custom-cart-count,.iosSlider .sliderNav a:hover span,.loading i, li.mini-cart.active .cart-icon strong,.product-image .quick-view, .product-image .product-bg, #submit, button, #submit, button, .button, input[type="submit"],li.mini-cart.active .cart-icon strong,.post-item:hover .post-date,.blog_shortcode_item:hover .post-date,.column-slider .sliderNav a:hover,.ux_banner {background-color: <?php echo $flatsome_opt['color_primary'] ?>}
 		/* -- borders -- */
 		.ux-header-element a:hover,.featured-table.ux_price_table,.text-bordered-primary,.callout.style3 .inner,ul.page-numbers li > span,.add-to-cart-grid .cart-icon strong, .add-to-cart-grid .cart-icon-handle,.add-to-cart-grid.loading .cart-icon strong,.navigation-paging a, .navigation-image a ,ul.page-numbers a ,ul.page-numbers a:hover,.post.sticky,.widget_product_tag_cloud a, .widget_tag_cloud a,.next-prev-nav .prod-dropdown > a:hover,.iosSlider .sliderNav a:hover span,.column-slider .sliderNav a:hover,.woocommerce .order-review, .woocommerce-checkout form.login,.button, button, li.mini-cart .cart-icon strong,li.mini-cart .cart-icon .cart-icon-handle,.post-date{border-color: <?php echo $flatsome_opt['color_primary'] ?>;}
 		/* -- alt buttons-- */
@@ -207,7 +217,17 @@ global $flatsome_opt;
 	
 </style>
 
-<?php 
+<?php
+
+$buffer = ob_get_clean();
+
+// Minify CSS
+$buffer = preg_replace('!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $buffer);
+$buffer = str_replace(': ', ':', $buffer);
+$buffer = str_replace(array("\r\n", "\r", "\n", "\t", '  ', '    ', '    '), '', $buffer);
+
+echo $buffer;
+
 }
 add_action( 'wp_head', 'flatsome_custom_css', 100 );
 ?>

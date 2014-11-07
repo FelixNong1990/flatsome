@@ -207,8 +207,8 @@ class Featured_Item_Post_Type {
 
 		register_taxonomy( 'featured_item_category', array( 'featured_item' ), $args );
 		
-		global $flatsome_opt;
-		$items_link = $flatsome_opt['featured_item_custom_link'];
+		//global $flatsome_opt;
+		//$items_link = $flatsome_opt['featured_item_custom_link'];
 		
 		//add_action( 'wp_loaded', 'add_featured_item_permastructure' );
 		function add_featured_item_permastructure($items_link) {
@@ -218,7 +218,6 @@ class Featured_Item_Post_Type {
 		}
 
 		//add_filter( 'post_type_link', 'recipe_permalinks', 10, 2 );
-		
 		function recipe_permalinks( $permalink, $post ) {
 			if ( $post->post_type !== 'featured_item' )
 				return $permalink;

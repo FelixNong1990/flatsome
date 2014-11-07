@@ -20,6 +20,7 @@ body.boxed{background-color: #555;}
 
 /* remove spacing before footer */
 #content > .ux_banner:last-child, #content > .ux-section:last-child, #content > .iosSlider.default:last-child, #content > .ux-block:last-child > .ux-section:last-child, #content > .ux-block:last-child > .iosSlider.default:last-child{margin-bottom: 0!important}
+.ux-section-content > .row.container:last-of-type,.ux-section-content > .row.column-slider:last-of-type > .iosSlider{margin-bottom: 0px!important;}
 
 /* -- row - divided style -- */
 .row.divided .columns{border-right:1px solid rgba(0,0,0,.05);}
@@ -119,6 +120,7 @@ ul.tabs{margin-left: 0!important}
 .tabbed-content.pos_pills ul.tabs{margin-bottom: 30px;}
 
 /* -- vertical tabs -- */
+.vertical-tabs{padding-top: 20px;}
 .vertical-tabs ul.tabs-nav{margin-top: 15px;margin-left: 0;z-index:9;border-right:1px solid $border;margin-right: -1px;height: 100%}
 .vertical-tabs ul.tabs-nav li{list-style: none;font-size: 90%;text-transform: uppercase;font-weight: bold}
 .vertical-tabs ul.tabs-nav li a{border-bottom: 1px solid $border-light;padding: 10px 0;display: block;color:#999;@include single-transition(border);}
@@ -188,7 +190,7 @@ button[disabled] { background-color: #333!important;opacity: 0.6;}
 #top-link.active{display: block;}
 
 /* -- Global UL / OL -- */
-.entry-content > ul,.short-description > ul,.tabs-inner ul, .tabs-inner ol, .accordian-inner ul, .accordian-inner ol,.woocommerce > ul,.woocommerce > ol{margin-left: 20px; }
+.column-inner > ul, .column-inner > ol, .entry-content > ul,.short-description > ul,.tabs-inner ul, .tabs-inner ol, .accordian-inner ul, .accordian-inner ol,.woocommerce > ul,.woocommerce > ol{margin-left: 20px; }
 ul.checkmarks li{margin-bottom: 10px;padding:0 0 15px;border-bottom: 1px dotted $border;line-height: 110%}
 ol.commentlist li{list-style: none}
 .entry-content ol{margin-left: 20px;}
@@ -207,7 +209,7 @@ ul.page-numbers li > span{color:#FFF;background-color: $primary-color;border-col
 
 
 /* -- section titles -- */
-h3.section-title{margin:0 auto 20px; max-width: 1050px; text-transform: uppercase;border-bottom: 3px solid #f1f1f1;}
+h3.section-title{margin:0 auto 30px; max-width: 1050px; text-transform: uppercase;border-bottom: 3px solid #f1f1f1;}
 h3.section-title a{float:right;padding-top: 5px;font-size: 80%}
 h3.section-title a:after{font-family: 'icomoon'; content: "\f105"; color:$primary-color;margin-left: 10px}
 h3.section-title span{display: inline-block;padding-bottom: 15px;border-bottom: 3px solid $border;margin-bottom: -3px;}
@@ -227,8 +229,10 @@ h3.section-title.title_divided a{display: block;float:none;}
 /* -- text dividers -- */
 .tx-div{display: block;height:3px;background-color:#000;opacity:0.1;margin:15px 0 15px }
 .text-center .tx-div{margin:15px auto 15px auto;}
+.text-right .tx-div{margin: 15px 0px 15px auto;}
 .tx-div.small{width: 30px;}
 .tx-div.medium{width: 60px}
+.tx-div.full{width:100%;}
 
 /* -- ux image -- */
 .ux-img-container img{height: auto;width: 100%;}
@@ -239,7 +243,7 @@ h3.section-title.title_divided a{display: block;float:none;}
 
 .ux-box .ux-box-image{overflow: hidden;top:0;}
 .ux-box .ux-box-image img{min-width:100%;top:0;position: relative;}
-.ux-box .ux-box-text{padding: 15px;}
+.ux-box .ux-box-text{padding: 10px;}
 
 
 /* -- UX Box Texts -- */
@@ -249,10 +253,7 @@ h3.section-title.title_divided a{display: block;float:none;}
 .ux-box h4{margin-bottom: 5px;}
 .ux-box h4 span{font-size: 90%;}
 .ux-box .ux-box-text{font-size: 90%}
-
-.ux-box.text-center .ux-box-text{padding-left: 15px;padding-right: 15px;}
-
-.ux-box span{opacity: 0.8}
+.ux-box.text-center .ux-box-text{padding-left: 5px;padding-right: 5px;}
 .ux-box .social-icons{margin-bottom: 15px;}
 
 /* - text circle */
@@ -262,6 +263,7 @@ h3.section-title.title_divided a{display: block;float:none;}
 /* - text overlay */
 .ux-box.ux-text-overlay{margin-bottom: 0;}
 .ux-box.ux-text-overlay .ux-box-text{position: absolute;bottom:5%;left:15px;right:15px;opacity: 0;text-shadow:1px 1px 1px rgba(0,0,0,0.2);@include single-transition(all, 300ms, ease-out);}
+.ux-box.ux-text-overlay.team-member .ux-box-text{bottom: 0;}
 .ux-box.ux-text-overlay:hover .ux-box-text{opacity: 1;bottom:10%;}
 .ux-box.post-item.ux-text-overlay:hover .ux-box-text{opacity: 1;bottom:5px;}
 .ux-box.ux-text-overlay .ux-box-image{background-color: $primary-color;}
@@ -272,6 +274,7 @@ h3.section-title.title_divided a{display: block;float:none;}
 .ux-box.ux-text-overlay .ux-box-text.show-first{opacity: 1;}
 .ux-box.ux-text-overlay .show-next{opacity: 0;position: relative; bottom:-10px;}
 .ux-box.ux-text-overlay:hover .show-next{opacity: 1;bottom:0;}
+
 
 /* - blog post overlay */
 .ux-box.post-item.ux-text-overlay .ux-box-text{left:30px;right:30px;padding:0 30px;}
@@ -306,7 +309,7 @@ h3.section-title.title_divided a{display: block;float:none;}
 
 
 /* -- section / boxed styles -- */
-.ux-section .row.boxed .columns > .column-inner,.ux-section .product-small .info{padding: 20px 30px} 
+.ux-section .row.boxed .columns > .column-inner{padding: 20px 30px} 
 .ux-section .row.boxed .columns > .column-inner,.ux-section .product-small .info,.ux-section .ux-box .inner-wrap{background: #f1f1f1; background: rgba(255,255,255,0.9); -webkit-box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1); -moz-box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1); box-shadow:  0px 0px 9px 0px rgba(0, 0, 0, 0.1);}
 .dark .ux-box.ux-text-bounce .ux-box-text,.dark .ux-box.ux-text-bounce:hover.ux-box-text, .dark .row.boxed .columns > .column-inner,.ux-section.dark .product-small .info,.ux-section.dark .ux-box .inner-wrap{background-color: #333; background-color:rgba(0,0,0,0.9);}
 .dark .ux-box.ux-text-bounce .inner-wrap{background: none;box-shadow: none;-webkit-box-shadow: none;-moz-box-shadow: none}

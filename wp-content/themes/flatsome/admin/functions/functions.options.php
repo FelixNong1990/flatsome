@@ -12,6 +12,10 @@ if (!function_exists('of_options'))
 		foreach ($of_categories_obj as $of_cat) {
 		    $of_categories[$of_cat->cat_ID] = $of_cat->cat_name;}
 		$categories_tmp 	= array_unshift($of_categories, "Select a category:");
+
+		// Presets URL
+		$preset_url = get_template_directory_uri().'/admin/presets/';
+
 	       
 		//Access the WordPress Pages via an Array
 		$of_pages 			= array();
@@ -775,14 +779,26 @@ $of_options[] = array( 	"name" 		=> "Header",
 );
 
 
+/*
+$of_options[] = array( 	"name" 		=> "Header preset",
+						"desc" 		=> "Select hader",
+						"id" 		=> "header_preset",
+						"type" 		=> "presets",
+						"options" 	=> array(
+										$preset_url.'/headers/header1.jpg' => "header_1",
+										$preset_url.'/headers/header2.jpg' => "header_2",
+						)
+);  */
+
+
 
 $of_options[] = array( 	"name" 		=> "Header height",
 						"desc" 		=> "Set height of header in px.",
 						"id" 		=> "header_height",
 						"std" 		=> "120",
-						"min" 		=> "60",
+						"min" 		=> "50",
 						"step"		=> "1",
-						"max" 		=> "200",
+						"max" 		=> "240",
 						"type" 		=> "sliderui" 
 );
 
@@ -887,9 +903,9 @@ $of_options[] = array( 	"name" 		=> "Sticky Header height",
 						"desc" 		=> "Set height of sticky header in px.",
 						"id" 		=> "header_height_sticky",
 						"std" 		=> "70",
-						"min" 		=> "60",
+						"min" 		=> "50",
 						"step"		=> "1",
-						"max" 		=> "200",
+						"max" 		=> "220",
 						"type" 		=> "sliderui" 
 );
 
@@ -1320,6 +1336,13 @@ $of_options[] = array( 	"name" 		=> "Related Products pr row",
 										"5" => "5",
 										"6" => "6"
 						)
+);
+
+$of_options[] = array( 	"name" 		=> "Max number of related products",
+						"desc" 		=> "",
+						"id" 		=> "max_related_products",
+						"std" 		=> "12",
+						"type" 		=> "text",
 );
 
 

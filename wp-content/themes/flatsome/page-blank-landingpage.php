@@ -33,10 +33,9 @@ global $flatsome_opt;
 <div id="wrapper">
 <div id="main-content" class="site-main">
 
-<?php if(in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) { ?> 
-	<!-- woocommerce message -->
-	<?php  woocommerce_show_messages(); ?>
-<?php } ?>
+<!-- woocommerce message -->
+<?php  if(function_exists('wc_print_notices')) {wc_print_notices();}?>
+
 <?php if( has_excerpt() ) { ?>
 <div class="page-header">
 	<?php the_excerpt(); ?>

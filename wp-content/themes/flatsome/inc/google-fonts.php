@@ -25,7 +25,7 @@ $customfontset = '';
 
 if(isset($flatsome_opt['type_subset'])){
 $subsets= array('latin');
-if($flatsome_opt['type_subset']['latin']){array_push($subsets, 'latin');}
+if($flatsome_opt['type_subset']['latin-ext']){array_push($subsets, 'latin-ext');}
 if($flatsome_opt['type_subset']['cyrillic-ext']){array_push($subsets, 'cyrillic-ext');}
 if($flatsome_opt['type_subset']['greek-ext']){array_push($subsets, 'greek-ext');}
 if($flatsome_opt['type_subset']['greek']){array_push($subsets, 'greek');}

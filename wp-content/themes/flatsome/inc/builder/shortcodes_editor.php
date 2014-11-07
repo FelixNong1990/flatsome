@@ -64,7 +64,7 @@ $ux_animate = array(
     "flipInY" => "flipInY",
 );
 
-$text_align = array('Left' => 0,'Center' => 'text-center','Right' => 'text-right');
+$text_align = array('Left' => 0,'Center' => 'center','Right' => 'right');
 
 
 // Shortcode options
@@ -156,8 +156,45 @@ array(
   "heading" => "Row Background - MP4 Video",
   "param_name" => "video_mp4",
   "value" => ""
+  ),array(
+  "type" => "textfield",
+  "heading" => "Class",
+  "param_name" => "class",
+  "value" => ""
+  ),array(
+    "type" => "attach_image",
+    "group" => "Image",
+    "heading" => "Image",
+    "param_name" => "img",
+    "value" => ""
+  ),
+  array(
+  "type" => "dropdown",
+  "group" => "Image",
+  "heading" => "Image position",
+  "param_name" => "img_pos",
+  "value" => array(
+    "Left" => "left",
+    "Right" => "right",
+    "Top" => "top",
+    "Bottom" => "bottom",
   )
-);
+  ),
+  array(
+  "type" => "textfield",
+   "group" => "Image",
+  "heading" => "Image width",
+  "param_name" => "img_width",
+  "value" => "50%"
+  ),array(
+  "type" => "textfield",
+  "group" => "Image",
+  "heading" => "Image margin",
+  "param_name" => "img_margin",
+  "value" => ""
+  )
+)
+;
 break;
 
 case 'col':
@@ -199,6 +236,13 @@ case 'col':
   "value" => $ux_animate
   ),
   array(
+  "type" => "dropdown",
+  "class" => "",
+  "heading" => "Text align",
+  "param_name" => "align",
+  "value" => $text_align
+  ),
+  array(
   "type" => "textfield",
   "heading" => "Padding",
   "param_name" => "padding",
@@ -207,10 +251,33 @@ case 'col':
   array(
   "type" => "textfield",
   "class" => "tooltip",
-  "heading" => "Tooltip text",
+  "heading" => "Tooltip",
   "param_name" => "tooltip",
   "value" => ""
-)
+),array(
+  "type" => "dropdown",
+  "class" => "",
+  "heading" => "Parallax",
+  "param_name" => "parallax",
+  "value" => array(
+    "0 - Disabled" => "0",
+    "1" => "1",
+    "2" => "2",
+    "3" => "3",
+    "4" => "4",
+    "5" => "5",
+    "6" => "6",
+    "7" => "7",
+    "8" => "8",
+    "9" => "9",
+  )
+),array(
+  "type" => "textfield",
+  "class" => "",
+  "heading" => "Class",
+  "param_name" => "class",
+  "value" => ""
+  ),
 
   );
   break;
@@ -237,8 +304,13 @@ case 'row':
   "heading" => "Width (px)",
   "param_name" => "width",
   "value" => "",
-  )
-  );
+  ),array(
+  "type" => "textfield",
+  "class" => "",
+  "heading" => "Class",
+  "param_name" => "class",
+  "value" => ""
+  ));
   break;
 
 case 'ux_banner': 
@@ -655,12 +727,12 @@ $options = array(
       "value" => "Button"
     ),
     array(
-      "type" => "href",
+      "type" => "textfield",
       "class" => "",
       "heading" => "Link",
       "param_name" => "link",
-      "admin_label" => true,
-      "value" => "http://href"
+      "value" => "http://href",
+      "description" => "Add button link here. Youtube and Vimeo links will open in a ligthbox automaticly."
     ),
     array(
       "type" => "dropdown",
@@ -697,6 +769,7 @@ $options = array(
       "class" => "",
       "heading" => "Target",
       "param_name" => "target",
+      "description" => "Use '_blank' to open in a new window.",
       "value" => ""
     ),     
    );
@@ -1601,12 +1674,6 @@ $options = array(
               ),
       ),
       array(
-      "type" => "image_fix",
-      "heading" => "Image fix",
-      "param_name" => "img",
-      "value" => ""
-      ),
-      array(
       "type" => "attach_image",
       "heading" => "Image",
       "param_name" => "img",
@@ -1742,11 +1809,11 @@ $options = array(
       "type" => "dropdown",
       "admin_label" => true,
       "heading" => "Width",
-      "param_name" => "width_",
+      "param_name" => "width",
       "value" => array(
         "Medium" => "medium",
         "Small" => "small",
-        "Full Width" => "full-width",
+        "Full Width" => "full",
         )
       ), 
       array(
@@ -1900,7 +1967,6 @@ $options = array(
       "type" => "textfield",
       "heading" => "Text",
       "param_name" => "text",
-      "admin_label" => true,
       "value" => "Enter text here.." 
       ),array(
       "type" => "textfield",
@@ -1919,12 +1985,10 @@ $options = array(
       "heading" => "Link",
       "param_name" => "link",
       "description" => "Use this link anywhere to scroll to this element. F.ex #section_name",
-      "admin_label" => true,
       "value" => "#unique_section_id"
       ),array(
       "type" => "textfield",
       "heading" => "Bullet title",
-      "admin_label" => true,
       "Descrition" => "Remove text to hide bullet",
       "param_name" => "title",
       "value" => "Enter a Title here..." 
@@ -2075,12 +2139,12 @@ foreach ($options as $option) {
   else if ( $option['type'] == 'attach_image' ) { ?>
   <h3><?php echo $option['heading']; ?></h3>
   <div class="ux-option">
-  <div class="attach-image-upload"><input data-id="<?php echo  $option['param_name'] ?>" placeholder="Enter image url or #hexcode"/><a href="#" class="button">Select</a></div>
+  <div class="attach-image-upload" data-upload="<?php echo  $option['param_name'] ?>"><input data-id="<?php echo  $option['param_name'] ?>" placeholder="Enter image url or #hexcode"/><a href="#" class="button">Select</a></div>
   <small><?php if(isset($option['description'])) echo $option['description'];  ?></small>
   </div>
   <script>
-    jQuery('.attach-image-upload a').click(function(){
-        ux_UploadImage('.attach-image-upload');
+    jQuery('.attach-image-upload[data-upload="<?php echo  $option['param_name'] ?>"] a').click(function(){
+        ux_UploadImage('.attach-image-upload[data-upload="<?php echo  $option['param_name'] ?>"]');
     });
   </script>
 

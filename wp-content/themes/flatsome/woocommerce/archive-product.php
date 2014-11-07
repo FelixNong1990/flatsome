@@ -154,12 +154,16 @@ if(function_exists('get_term_meta')){
 <?php if($flatsome_opt['category_sidebar'] == 'right-sidebar') { ?>
 <!-- Right Shop sidebar -->
         <div class="large-3 right columns">
-            <?php dynamic_sidebar('shop-sidebar'); ?>
+        	<div class="sidebar-inner">
+            	<?php dynamic_sidebar('shop-sidebar'); ?>
+       		</div>
         </div>            
 <?php } else if ($flatsome_opt['category_sidebar'] == 'left-sidebar') { ?>
 <!-- Left Shop sidebar -->
 		<div class="large-3 left columns">
-            <?php dynamic_sidebar('shop-sidebar'); ?>
+			<div class="sidebar-inner">
+           		<?php dynamic_sidebar('shop-sidebar'); ?>
+            </div>
         </div>
 <?php } ?>
 

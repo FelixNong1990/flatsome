@@ -24,11 +24,20 @@ if ( !current_user_can( 'manage_options' ) ) die;
 
 	<?php wp_head(); ?>
 </head>
+
+<?php if(isset($_GET['edit_block'])) { ?>
+<body class="antialiased">
+	<div id="wrapper">
+	<?php while ( have_posts() ) : the_post(); ?>
+		<?php echo fixShortcode(get_the_content()); ?>
+	<?php endwhile; // end of the loop. ?>
+	</div>
+</body>
+<?php } else { ?> 
 <body class="antialiased">
 	<div id="wrapper" class="content-area" style="height:1px;">
 		<div class="ux_block">
 		<?php while ( have_posts() ) : the_post(); ?>
-
 			<?php echo fixShortcode(get_the_content()); ?>
 			 <?php if (current_user_can('edit_posts')) {
 			 $edit_link = get_edit_post_link( $post->ID ); 
@@ -38,7 +47,7 @@ if ( !current_user_can( 'manage_options' ) ) die;
 		</div>
 		</div><!-- #content -->
 	</div><!-- #primary -->
-
+<?php } ?>
 <?php wp_footer(); ?>
 <style>.demo_store{display: none!important} html{margin-top: 0px!important}</style>
 </body>

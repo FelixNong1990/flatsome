@@ -73,6 +73,7 @@ if(uxgetCookie('uxbuilder') === 'enabled'){
 jQuery( document ).ready(function($) {
 
 
+
 // start ux builder on start if set
 if($('html[data-uxbuilder="enabled"]').length){
   $('a#enable-uxbuilder').addClass('active');
@@ -82,7 +83,6 @@ if($('html[data-uxbuilder="enabled"]').length){
 } else{
   $('a#disable-uxbuilder').addClass('active');
 }
-
 
 // update content on save or change
 $('#disable-uxbuilder, .button[name="save"], .preview.button').click(function(){
@@ -112,6 +112,13 @@ $('a#disable-uxbuilder').click(function(e){
   $(window).resize();
   e.preventDefault();
 });
+
+// close lightbox
+
+$('.close-lightbox').click(function(){
+  $('.ux-lightbox').removeClass('active');
+});
+
 
 
 // Clean empty lines
@@ -481,16 +488,22 @@ function updateContent(){
 
 // Get all content
 function getAllContent(){
-  $('.drag-drop-content').html('<div class="ux-g"><span class="spinner" style="display:block;float:none;"></span></div>');
    var new_content = get_content('#wp-content-wrap');
-   var data = { action: 'ux_get_content_shortcodes', content: new_content};
-    $.post(ajaxurl, data, function(response) {
-      $('#drag-and-drop .drag-drop-content').html(response);
+   if(new_content){
+      $('.drag-drop-content').html('<div class="ux-g"><span class="spinner" style="display:block;float:none;"></span></div>');
+      var data = { action: 'ux_get_content_shortcodes', content: new_content};
+      $.post(ajaxurl, data, function(response) {
+        $('#drag-and-drop .drag-drop-content').html(response);
+         $('.ux-g-text-inner').find('.button:first').before('<p></p>');
+         $('#uxbuilder-enable-disable').removeClass('disabled');
+         updateLayout();
+      });
+   } else{
+       $('.drag-drop-content').html('');
        updateLayout();
-       $('.ux-g-text-inner').find('.button:first').before('<p></p>');
-       $('#uxbuilder-enable-disable').removeClass('disabled');
-    });
-}
+   }
+
+  }
 
 
 function updateLayout(selected_div){
@@ -506,6 +519,8 @@ function updateLayout(selected_div){
         createEditor(selected_div);
         toolBarAction(selected_div);
 }
+
+
 
 
 });

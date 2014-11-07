@@ -76,6 +76,9 @@
 /* -- text widget -- */
 .textwidget{line-height: 160%;font-size: 100%;}
 
+/* -- Cart widgets */
+.widget_shopping_cart dd p{padding: 0;margin: 0;}
+
 /* -- calender widget -- */
 .widget_calendar caption{text-transform: uppercase;font-weight: bold;padding:15px 0px;border-top: 2px solid $border;}
 

@@ -2,8 +2,9 @@
 function slider_script($sliderrandomid,$columns,$infinitive){
 	?>
 	<script type="text/javascript">
+
 	jQuery(document).ready(function($) {
-		$(window).load(function() {
+
 	
 		$('#slider_<?php echo $sliderrandomid ?>').iosSlider({
 			snapToChildren: true,
@@ -14,12 +15,12 @@ function slider_script($sliderrandomid,$columns,$infinitive){
         	verticalSlideLockThreshold: 2,
 			navPrevSelector: '.prev_<?php echo $sliderrandomid ?>',
 			navNextSelector: '.next_<?php echo $sliderrandomid ?>',
-			onSliderLoaded: slideLoad,
-			onSliderResize: slideLoad,
+			onSliderLoaded: slideResize,
+			onSliderResize: slideResize,
 			onSlideChange: slideChange,
 		});
 
-		function slideLoad(args) {
+		function slideResize(args) {
 			setTimeout(function() {
 			 var t=0;
 			 var t_elem;
@@ -34,7 +35,6 @@ function slider_script($sliderrandomid,$columns,$infinitive){
 				$(args.sliderContainerObject).css('height','auto');
 			  }, 10);
     	 }
-
 
     	 function slideChange(args,slider_count) {
     	 	<?php if($infinitive == 'false') { ?>
@@ -52,7 +52,6 @@ function slider_script($sliderrandomid,$columns,$infinitive){
 			 }
 			<?php } ?>
     	 	}
-    	 	});
 	  
 	});
 	</script>
@@ -79,7 +78,6 @@ function ux_best_sellers($atts, $content = null) {
 	if(function_exists('wc_print_notices')) {
 	?>
     
-		<?php slider_script($sliderrandomid,$columns,$infinitive)?>
 
 		<?php if($title){?> 
 		<div class="row">
@@ -90,7 +88,7 @@ function ux_best_sellers($atts, $content = null) {
 		<?php } ?>
 
 		<div class="row column-slider">
-            <div id="slider_<?php echo $sliderrandomid ?>" class="iosSlider" style="overflow:hidden;height:200px;min-height:200px;">
+            <div id="slider_<?php echo $sliderrandomid ?>" class="iosSlider" style="overflow:hidden;height:250px;min-height:250px;">
                 <ul class="slider large-block-grid-<?php echo $columns; ?> small-block-grid-2">
 						<?php
                     $query_args = array(
@@ -136,6 +134,8 @@ function ux_best_sellers($atts, $content = null) {
        		</div> <!-- .iOsslider -->
     </div><!-- .row .column-slider -->
 
+		<?php slider_script($sliderrandomid,$columns,$infinitive)?>
+
     
     <?php } ?>
 
@@ -167,7 +167,6 @@ function ux_featured_products($atts, $content = null) {
 	if(function_exists('wc_print_notices')) {
 	?>
     
-		<?php slider_script($sliderrandomid,$columns,$infinitive)?>
 
 		<?php if($title){?> 
 		<div class="row">
@@ -178,7 +177,7 @@ function ux_featured_products($atts, $content = null) {
 		<?php } ?>
 
 		<div class="row column-slider">
-            <div id="slider_<?php echo $sliderrandomid ?>" class="iosSlider" style="overflow:hidden;height:200px;min-height:200px;">
+            <div id="slider_<?php echo $sliderrandomid ?>" class="iosSlider" style="overflow:hidden;height:250px;min-height:250px;">
                 <ul class="slider large-block-grid-<?php echo $columns; ?> small-block-grid-2">
 					<?php
                 	$query_args = array('posts_per_page' => $products, 'no_found_rows' => 1, 'post_status' => 'publish', 'post_type' => 'product' );
@@ -217,6 +216,9 @@ function ux_featured_products($atts, $content = null) {
 
     <?php } ?>
 
+    		<?php slider_script($sliderrandomid,$columns,$infinitive)?>
+
+
 	<?php
 	$content = ob_get_contents();
 	ob_end_clean();
@@ -248,7 +250,6 @@ function ux_sale_products($atts, $content = null) {
 	if(function_exists('wc_print_notices')) {
 	?>
     
-		<?php slider_script($sliderrandomid,$columns,$infinitive)?>
 
 		<?php if($title){?> 
 		<div class="row">
@@ -259,7 +260,7 @@ function ux_sale_products($atts, $content = null) {
 		<?php } ?>
 
 		<div class="row column-slider">
-            <div id="slider_<?php echo $sliderrandomid ?>" class="iosSlider" style="overflow:hidden;height:200px;min-height:200px;">
+            <div id="slider_<?php echo $sliderrandomid ?>" class="iosSlider" style="overflow:hidden;height:250px;min-height:250px;">
                 <ul class="slider large-block-grid-<?php echo $columns; ?> small-block-grid-2">
 				 <?php
                    	$product_ids_on_sale = woocommerce_get_product_ids_on_sale();
@@ -304,6 +305,8 @@ function ux_sale_products($atts, $content = null) {
        		 </div> <!-- .iOsslider -->
     </div><!-- .row .column-slider -->
 
+		<?php slider_script($sliderrandomid,$columns,$infinitive)?>
+
     
     <?php } ?>
 
@@ -335,7 +338,6 @@ function ux_latest_products($atts, $content = null) {
 	if(function_exists('wc_print_notices')) {
 	?>
     
-		<?php slider_script($sliderrandomid,$columns,$infinitive)?>
 
 		<?php if($title){?> 
 		<div class="row">
@@ -346,7 +348,7 @@ function ux_latest_products($atts, $content = null) {
 		<?php } ?>
 
 		<div class="row column-slider">
-            <div id="slider_<?php echo $sliderrandomid ?>" class="iosSlider" style="overflow:hidden;height:200px;min-height:200px;">
+            <div id="slider_<?php echo $sliderrandomid ?>" class="iosSlider" style="overflow:hidden;height:250px;min-height:250px;">
                 <ul class="slider large-block-grid-<?php echo $columns; ?> small-block-grid-2 ux-latest-products">
 				  <?php
             
@@ -384,7 +386,8 @@ function ux_latest_products($atts, $content = null) {
        			   </div><!-- .sliderControlls -->
        		 </div> <!-- .iOsslider -->
     </div><!-- .row .column-slider -->
-
+		
+	<?php slider_script($sliderrandomid,$columns,$infinitive)?>
     
     <?php } ?>
 
@@ -417,8 +420,6 @@ function ux_custom_products($atts, $content = null) {
 	if(function_exists('wc_print_notices')) {
 	?>
     
-		<?php slider_script($sliderrandomid,$columns,$infinitive)?>
-
 		<?php if($title){?> 
 		<div class="row">
 			<div class="large-12 columns">
@@ -428,7 +429,7 @@ function ux_custom_products($atts, $content = null) {
 		<?php } ?>
 
 		<div class="row column-slider">
-            <div id="slider_<?php echo $sliderrandomid ?>" class="iosSlider" style="overflow:hidden;height:100px;min-height:100px;">
+            <div id="slider_<?php echo $sliderrandomid ?>" class="iosSlider" style="overflow:hidden;height:200px;min-height:200px;">
                 <ul class="slider large-block-grid-<?php echo $columns; ?> small-block-grid-2">
 				  <?php
             
@@ -470,6 +471,9 @@ function ux_custom_products($atts, $content = null) {
 
     
     <?php } ?>
+
+    <?php slider_script($sliderrandomid,$columns,$infinitive)?>
+
 
 	<?php
 	$content = ob_get_contents();

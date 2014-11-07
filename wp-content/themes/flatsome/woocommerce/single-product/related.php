@@ -11,7 +11,10 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 global $product, $woocommerce_loop, $flatsome_opt;
 
-$related = $product->get_related(12);
+
+if(!isset($flatsome_opt['max_related_products'])) {$flatsome_opt['max_related_products'] = '12';}
+
+$related = $product->get_related($flatsome_opt['max_related_products']);
 
 if ( sizeof( $related ) == 0 ) return;
 
@@ -26,11 +29,10 @@ $args = apply_filters('woocommerce_related_products_args', array(
 
 $products = new WP_Query( $args );
 
-
 if ( $products->have_posts() ) : ?>
 <div class="related products">
 <?php // SLIDER 
-if(!isset($flatsome_opt['related_products_pr_row'])) $flatsome_opt['related_products_pr_row'] = '4';
+if(!isset($flatsome_opt['related_products_pr_row'])) {$flatsome_opt['related_products_pr_row'] = '4';}
 if($flatsome_opt['related_products'] == 'slider' || !isset($flatsome_opt['related_products'])){ ?>
 <h2><?php _e( 'Related Products', 'woocommerce' ); ?></h2>
 
@@ -111,11 +113,11 @@ if($flatsome_opt['related_products'] == 'slider' || !isset($flatsome_opt['relate
        		</div> <!-- .iOsslider -->
     </div><!-- .row .column-slider -->
 	</div>
-<? } // GRID
+<?php } // GRID
 else if($flatsome_opt['related_products'] == 'grid'){ ?>
 <h2><?php _e( 'Related Products', 'woocommerce' ); ?></h2>
 
-                <ul class="products large-block-grid-4 small-block-grid-2">
+                <ul class="products large-block-grid-<?php echo $flatsome_opt['related_products_pr_row']; ?> small-block-grid-2">
 
 							<?php while ( $products->have_posts() ) : $products->the_post(); ?>
 
@@ -124,7 +126,7 @@ else if($flatsome_opt['related_products'] == 'grid'){ ?>
 							<?php endwhile; // end of the loop. ?>
 
                 </ul>   <!-- .slider -->  
-<?php } else{ } ?>
+<?php } else { } ?>
 
 <?php endif;
 

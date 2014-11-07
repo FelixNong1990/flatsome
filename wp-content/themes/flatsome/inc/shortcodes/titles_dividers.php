@@ -26,14 +26,11 @@ add_shortcode('title', 'title_shortcode');
 function divider_shortcode( $atts, $content = null ){
   extract( shortcode_atts( array(
     'width' => 'small',
-    'width_' => 'small',
-    'height' => '3px',
-    'align' => 'left',
+    'height' => '',
+    'align' => 'left', 
   ), $atts ) );
 
-if($width_) $width = $width_;
 if($height) $height = 'style="height:'.$height.'"';
-
 
 $align_end ='';
 $align_start = '';

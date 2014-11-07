@@ -37,13 +37,6 @@ function shortcode_ux_slider($atts, $content=null) {
 <script type="text/javascript">
     (function($){
     $(window).load(function(){
-    // Paragraph fix
-    $('#slider_<?php echo $sliderrandomid; ?>').find('br').remove();
-    $('#slider_<?php echo $sliderrandomid; ?>').find('p').each(function() {
-    var $this = $(this);
-    if($this.html().replace(/\s|&nbsp;/g, '').length == 0)
-        $this.remove();
-    });
 
     /* install slider */
     $('#slider_<?php echo $sliderrandomid; ?>').iosSlider({

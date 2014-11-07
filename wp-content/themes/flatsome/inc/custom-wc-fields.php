@@ -14,10 +14,14 @@ if(!function_exists('wc_custom_product_data_fields')){
 
     $custom_product_data_fields[] = array(
           'id'          => '_bubble_new',
-          'type'        => 'checkbox',
-          'label'       => __('Show "New" Bubble', 'flatsome'),
+          'type'        => 'select',
+          'label'       => __('"New" Bubble', 'flatsome'),
           'description' => __('Enable a New bubble on this product', 'flatsome'),
           'desc_tip'    => true,
+           'options'     => array(
+              ''  => 'Disabled',
+              '"yes"'  => 'Enabled',
+          ),
     );
 
 

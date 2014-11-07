@@ -8,17 +8,19 @@
  
 ?>
 
+<?php
+    /**
+     * woocommerce_before_single_product hook
+     *
+     * @hooked woocommerce_show_messages - 10
+     */
+     do_action( 'woocommerce_before_single_product' );
+?>   
+
 <div itemscope itemtype="http://schema.org/Product" id="product-<?php the_ID(); ?>" <?php post_class(); ?>>	
     
 <div class="row">    
-    	<?php
-			/**
-			 * woocommerce_before_single_product hook
-			 *
-			 * @hooked woocommerce_show_messages - 10
-			 */
-			 do_action( 'woocommerce_before_single_product' );
-		?>    
+     
         <div class="large-5 columns product-gallery">        
         
             <?php

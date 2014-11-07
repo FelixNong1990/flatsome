@@ -61,13 +61,13 @@ function ux_scroll_to($atts, $content = null) {
             var css_class = '';
             if(title){css_class = 'tip-left';}
 
-            if($(this).data('bullet','true')){
-              $('.scroll-to-bullets').append('<a href="'+link+'" class="'+css_class+' animated fadeInRight" title="'+title+'"><strong></strong></a>');
-            }
-
+            $('.scroll-to-bullets').append('<a href="'+link+'" class="'+css_class+' animated fadeInRight" title="'+title+'"><strong></strong></a>');
+            
             $('a[href="'+link+'"]').click(function(){
                 $.scrollTo(end,500);
+                e.preventDefault();
             });
+
             $(this).waypoint(function(direction) {
               $('.scroll-to-bullets a').removeClass('active');
               $('.scroll-to-bullets').find('a[href="'+link+'"]').addClass('active');
@@ -87,12 +87,12 @@ function ux_scroll_to($atts, $content = null) {
   add_action('wp_footer','scroll_to_js');
 
   extract(shortcode_atts(array(
-    'link'  => '#',
     'bullet' => 'true',
     'title' => '',
+    'link' => '',
   ), $atts));
 
-  return '<span class="scroll-to" data-link="'.$link.'" data-bullet="'.$bullet.'" data-title="'.$title.'"></span>';
+  return '<span class="scroll-to" data-link="'.$link.'" data-title="'.$title.'"></span>';
 }
 
 add_shortcode("scroll_to", "ux_scroll_to");
@@ -186,3 +186,40 @@ function ux_header_button( $atts, $content = null ){
     return $content;
 }
 add_shortcode('header_button', 'ux_header_button');
+
+
+// UX Texts
+
+// [ux_text] 
+function uxTextShortcode( $atts, $content = null ){
+  global $flatsome_opt;
+  extract( shortcode_atts( array(
+    'text_pos' => 'center',
+    'height' => 'auto',
+    'text_align' => 'left',
+    'text_color' => 'light',
+    'padding' => '30px',
+  ), $atts ) );
+   ob_start();
+   $textalign = "";
+   if($text_align) {$textalign = "text-".$text_align;}
+   $color = "light";
+   if($text_color == 'light') $color = "dark";
+   $fix = array (
+                '_____' => '<div class="tx-div large"></div>',
+                '____' => '<div class="tx-div medium"></div>',
+                '___' => '<div class="tx-div small"></div>',
+   );
+   $content = strtr($content, $fix);
+?>
+<div class="ux_text <?php echo $text_pos; ?> <?php echo $color; ?> <?php echo $textalign; ?>" style="height:<?php echo $height; ?>">
+    <div class="inner" style="padding:<?php echo $padding; ?>;">
+      <?php echo do_shortcode($content); ?>
+    </div>
+  </div><!-- end .ux_text -->
+<?php 
+  $content = ob_get_contents();
+  ob_end_clean();
+  return $content;
+}
+add_shortcode('ux_text', 'uxTextShortcode');

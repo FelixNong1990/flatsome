@@ -44,12 +44,14 @@ function ux_drag_and_drop_box( $post ) {
   ?>
   <style>#ux_drag_and_drop, #postdivrich{display: none!important;}</style>
   <div id="drag-and-drop">
- 
+   
   <div class="ux-add-elements-wrap" data-id="root">
           <div class="ux-g-add top"></div>
   </div>
 
-  <div class="drag-drop-content ux-g-group" data-group="root"><div class="ux-g "><span class="spinner" style="display:block;float:none;"></span></div></div><!-- .drag-drop-content -->
+    <!-- MAIN CONTENT -->
+        <div class="drag-drop-content ux-g-group" data-group="root"></div><!-- .drag-drop-content -->
+    <!-- END MAIN CONTENT -->
 
   <div class="ux-add-elements-wrap" data-id="root">
           <div class="ux-g-add bottom"></div>

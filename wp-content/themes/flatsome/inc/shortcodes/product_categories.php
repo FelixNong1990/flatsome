@@ -338,7 +338,7 @@ function ux_product_categories_grid($atts, $content = null) {
                   $idcat = $category->woocommerce_term_id;
                   $thumbnail_id = get_woocommerce_term_meta( $idcat, 'thumbnail_id', true );
 
-                  $image =  wp_get_attachment_image_src(  $thumbnail_id, 'medium' );
+                  $image =  wp_get_attachment_image_src(  $thumbnail_id, 'large' );
                   $image = $image[0];
 
                   if ( $category->count > 0 ) $cat_count = apply_filters( 'woocommerce_subcategory_count_html', ' <span class="count">' . $category->count . ' '.__('Products','woocommerce').'</span>', $category);

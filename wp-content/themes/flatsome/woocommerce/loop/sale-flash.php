@@ -18,7 +18,7 @@ global $post, $product, $flatsome_opt, $wc_cpdf;
 <?php if($wc_cpdf->get_value(get_the_ID(), '_bubble_new')) { ?>
 <div class="callout <?php if($product->is_on_sale()) echo 'has-sale'; ?> <?php echo $flatsome_opt['bubble_style']; ?>">
             <div class="inner success-bg">
-              <div class="inner-text "><?php _e('New','flatsome'); ?>!</div>
+              <div class="inner-text "><?php _e('New','flatsome'); ?></div>
             </div>
 </div><!-- end callout -->
 <?php } ?>

@@ -24,8 +24,6 @@ global $flatsome_opt;
 
 	<?php wp_head(); ?>
 </head>
-<!-- loading -->
-
 
 <body <?php body_class(); ?>>
 
@@ -360,7 +358,7 @@ if($flatsome_opt['html_intro'] && is_front_page()) echo '<div class="home-intro"
 			</div>
 		</div>
 		<?php } ?>
-		</div><!-- nav-wrapper -->
+		</div><!-- .nav-wrapper -->
 		</div><!-- .large-12 -->
 	</div><!-- .row -->
 </div><!-- .wide-nav -->

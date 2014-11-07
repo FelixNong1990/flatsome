@@ -175,7 +175,7 @@ https://github.com/imakewebthings/jquery-waypoints/blob/master/licenses.txt
 if(! /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
 jQuery(function($){
 
-  $elements = $('.ux_banner, .ux-section, .parallax_img').find('[data-velocity]');
+  $elements = $('.ux_banner, .ux-section, .parallax_img, .columns').find('[data-velocity]');
 
   var topOffset = $('.header-wrapper').outerHeight()+$('#wpadminbar').outerHeight();
 
@@ -184,7 +184,7 @@ jQuery(function($){
     var scrollTop    = $(window).scrollTop();
     $elements.each(function(i){
       var $this     = $(this);
-      var $banner   = $this.parents('.ux_banner, .ux-section, .parallax_img');
+      var $banner   = $this.parents('.ux_banner, .ux-section, .parallax_img, .columns');
 
       if(!$this.hasClass('parallax_text') && !$this.hasClass('parallax_img_inner')) {
         // Parallax elements needs to have same height
@@ -212,7 +212,7 @@ jQuery(function($){
 
     $elements.each(function(i){
       var $this       = $(this);
-      var $banner     = $this.parents('.ux_banner, .ux-section, .parallax_img');
+      var $banner     = $this.parents('.ux_banner, .ux-section, .parallax_img, .columns');
       var toTop       = $banner.offset().top-scrollTop;
 
       // Just stop here if the banner is out of screen.
@@ -221,8 +221,6 @@ jQuery(function($){
       }
 
       var ratio       = 1-$this.data('velocity');
-      var center      = ($(window).height()/2)-($banner.outerHeight()/2);
-      var toCenter    = toTop-center;
       var status      = (toTop-topOffset)/windowHeight*0.7;
       var bgTop       = -toTop+(toTop*ratio);
       var textTop     = -toTop+topOffset+((toTop-topOffset)*ratio);

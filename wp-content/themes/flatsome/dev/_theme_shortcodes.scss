@@ -48,7 +48,7 @@
 /* -- featured box -- */
 .featured-box {position:relative;@include single-transition(opacity);}
 .featured-box .featured-img{margin-bottom: 10px}
-.featured-box h4{font-size: 100%;margin-bottom: 5px;}
+.featured-box h4{font-size: 100%;margin-bottom: 5px;text-transform: uppercase;}
 .featured-box h4 span{display: block;font-weight:normal;font-weight:300;opacity: 0.9;text-transform: none;}
 .featured-box p{font-size: 95%;}
 .featured-box p:last-of-type{padding-bottom: 0;margin-bottom: 0}
@@ -73,6 +73,7 @@
 .message-box{background-repeat:repeat-x; padding: 10px;text-align: center;text-transform: uppercase;font-weight: bold; font-size: 110%}
 .message-box .inner{padding: 15px;}
 .message-box .inner .button{margin: 0 15px}
+.message-box p{padding:0;}
 
 /* -- add to cart shortcode --*/
 p.product.woocommerce{border:0px!important}

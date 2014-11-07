@@ -36,8 +36,8 @@ function team_member($atts, $content = null) {
             <?php echo $name; ?><br>
             <span class="thin-font"><?php echo $title; ?></span>
           </h4>
-          <div class="tx-div small"></div>
           <div class="show-next">
+             <div class="tx-div small"></div>
              <div class="social-icons">
               <?php if($facebook){?> 
                 <a href="<?php echo $facebook; ?>" target="_blank"  class="icon icon_facebook tip-top" title="<?php echo $facebook; ?>"><span class="icon-facebook"></span></a>
@@ -65,9 +65,8 @@ function team_member($atts, $content = null) {
   </div>
 </div>
   <?php if($style  == 'text-overlay') { ?>
-     <p class="small" style="margin-top:15px;"><?php  echo $content; ?></p> 
+     <div class="small-font" style="margin-top:15px;"><?php  echo $content; ?></div> 
   <?php } ?>
-
 	<?php
 	$content = ob_get_contents();
 	ob_end_clean();

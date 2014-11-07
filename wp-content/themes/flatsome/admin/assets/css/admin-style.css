@@ -918,3 +918,13 @@ width: 225px;
 #of_container .controls .of-radio-img-selected {
 	border:3px solid #36577d
 }
+
+
+.section-presets .explain{
+display: none;
+}
+
+.section-presets img{display: block;margin:10px 0;border:1px solid #eee;opacity: 0.8;}
+.section-presets img:hover{border:1px solid #000; opacity: 1;}
+.section-presets  .controls{width:590px!important;}
+.pre_select_wrapper{display: none;}
